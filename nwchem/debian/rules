@@ -18,12 +18,12 @@ export NWCHEM_TARGET=LINUX64
 export USE_SCALAPACK_I8="yes"
 export BLAS_SIZE=4
 export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL) -lblacs-$(ARCH_DEFAULT_MPI_IMPL)
-export BLAS_LIB=-lopenblas
+export BLASOPT=-lopenblas
 export LAPACK_LIB=-lopenblas
 export USE_64TO32="yes"
 else
 export NWCHEM_TARGET=LINUX
-export BLAS_LIB="-lblas"
+export BLASOPT="-lblas"
 export LAPACK_LIB="-llapack"
 export USE_SCALAPACK="yes"
 export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)
@@ -59,9 +59,8 @@ endif
 export MRCC_METHODS=y
 export IPCCSD=y
 export EACCSD=y
-#export BLASOPT=-lblas -llapack
 #export BLACS=$(SCALAPACK)
-export ARMCI_NETWORK=MPI-PR
+export ARMCI_NETWORK=MPI-TS
 export GA_COPT=-g -O2
 export ARMCI_COPT=-g -O2
 
