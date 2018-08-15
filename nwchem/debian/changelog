@@ -1,0 +1,541 @@
+nwchem (6.8.1+133+gitge032219-2) unstable; urgency=medium
+
+  * ARMCI_NETWORK=MPIT-TS
+
+ -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 AUg 2018 10:10:00 +0000
+
+nwchem (6.8.1+133+gitge032219-1) unstable; urgency=medium
+
+  * 6.8.1 release
+  * openblas for BLAS and LAPACK
+
+ -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 AUg 2018 10:10:00 +0000
+
+nwchem (6.8+47+gitdf6c956-3) unstable; urgency=medium
+
+  * Team upload
+  * Use DEB_HOST_MULTIARCH instead of DEB_HOST_GNU_TYPE to fix FTBFS on i386
+
+ -- Graham Inggs <ginggs@debian.org>  Mon, 25 Jun 2018 08:38:05 +0000
+
+nwchem (6.8+47+gitdf6c956-2) unstable; urgency=medium
+
+  [ Drew Parsons ]
+  * Remove Build-Depends: libblacs-mpi-dev, instead use versioned
+    Build-Depends: libscalapack-mpi-dev (>= 2).
+    BLACS is now included in SCALAPACK 2. Closes: #875268.
+
+  [ Michael Banck ]
+  * debian/rules (DEB_HOST_GNU_TYPE): New variable.
+  * debian/rules (MPI_INCLUDE): update MPI include path with
+    $DEB_HOST_GNU_TYPE.
+  * debian/rules (NWCHEM_LONG_PATHS): New variable, should allow for longer
+    paths (Closes: #722511).
+  * debian/rules (override_dh_auto_clean): Remove
+    src/config/{NWCHEM_CONFIG,nwchem_config.h} after dh_auto_clean ran
+    (Closes: #875267).
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 24 Jun 2018 20:04:18 +0200
+
+nwchem (6.8+47+gitdf6c956-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches/02_makefile_flags.patch: Updated.
+  * debian/patches/patches/06_statfs_kfreebsd.patch: Likewise.
+  * debian/patches/16_deterministic_timestamp_in_ar_workaround.patch: Removed,
+    no longer needed.
+  * debian/patches/17_fix_implicit_conversion_to_pointer.patch: Removed,
+    applied upstream.
+  * debian/patches/18_upstream_patches.patch: Likewise.
+  * debian/patches/19_disable_march_native.patch: Removed, no longer needed.
+  * debian/watch: Updated.
+  * debian/rules: Enable scalapack.
+  * debian/rules (BLAS_LIB, LAPACK_LIB): Set to actual linker flags.
+  * debian/control (Build-Depends): Removed texlive-latex-base.
+  * debian/nwchem.doc-base: Removed file.
+  * debian/nwchem-data.install: No longer install the PDF manual.
+  * debian/rules (override_dh_auto_build-indep): Target removed.
+
+ -- Michael Banck <mbanck@debian.org>  Tue, 01 May 2018 14:17:30 +0200
+
+nwchem (6.6+r27746-4) unstable; urgency=medium
+
+  * debian/patches/19_disable_march_native.patch: Remove -mtune=native as well
+    (Closes: #844763). 
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 19 Nov 2016 10:26:38 +0100
+
+nwchem (6.6+r27746-3) unstable; urgency=medium
+
+  * debian/control (Description): Move RI-MP2 method to analytical gradients
+    section.
+  * debian/patches/19_disable_march_native.patch: New patch, disables
+    -march=native on amd64, by Edoardo Apra (Closes: #840186).
+
+ -- Michael Banck <mbanck@debian.org>  Fri, 18 Nov 2016 12:20:28 +0100
+
+nwchem (6.6+r27746-2) unstable; urgency=medium
+
+  * debian/patches/17_fix_implicit_conversion_to_pointer.patch: New patch,
+    includes ga-mpi.h, silencing build warnings/errors depending on compiler
+    flags.
+  * debian/rules: Disable scalapack on 32bit archictures for now as well.
+  * debian/patches/18_upstream_patches.patch: New patch, contains the following
+    upstream patches:
+    + Cosmo_meminit.patch
+    + Dplot_tolrho.patch
+    + Driver_smalleig.patch
+    + Ga_argv.patch
+    + Raman_displ.patch
+    + Sym_abelian.patch
+    + Tddft_mxvec20.patch
+    + Tools_lib64.patch
+    + Xccvs98.patch
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 14 Feb 2016 13:05:15 +0100
+
+nwchem (6.6+r27746-1) unstable; urgency=medium
+
+  * New upstream release.  New features include:
+    + New AIMD ab-initio molecular dynamics module (NVT, NVE) for molecular
+      systems with gaussian basis sets
+    + York-Karplus approach in the COSMO solvation model
+    + Metropolis NVT and NPT added to PSPW module
+    + Grimme2 and Grimme3 potentials added to NWPW module
+    + New, simple to use, implementation of the PAW method into PSPW module
+    + Equation parser for defining collective variables in Metadynamics and
+      TAMD
+  * debian/patches/03_hurd-i386_define_path_max.patch: Refreshed.
+  * debian/patches/06_statfs_kfreebsd.patch: Likewise.
+  * debian/patches/07_ga_target_force_linux.patch: Likewise.
+  * debian/patches/11_fix_armci_locks.patch: Likewise.
+  * debian/patches/12_pythonlib_multiarch_path.patch: Likewise.
+  * debian/patches/16_deterministic_timestamp_in_ar_workaround.patch: Likewise.
+  * debian/control (Build-Depends): Added pkg-config.
+  * debian/rules (LIBMPI): Updated for new OpenMPI, thanks to Graham Inggs.
+  * debian/rules (override_dh_auto_clean): Remove src/util/util_module_avail.F.
+  * debian/patches/02_makefile_flags.patch: Updated.
+  * debian/patches/14_fix_ga_download.patch: Removed, no longer needed.
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 13 Feb 2016 21:56:16 +0100
+
+nwchem (6.5+r26243-6) unstable; urgency=medium
+
+  * debian/control (Build-Depends): Added libblas-dev and liblapack-dev.
+  * debian/rules (BLAS_LIB, LAPACK_LIB): New variables.
+  * debian/patches/02_makefile_flags.patch: Updated to no longer build the
+    internal blas/lapack code.
+  * debian/rules (override_dh_auto_build-arch): Run 64_to_32 target prior to
+    build, and 32_to_64 afterwards.
+  * debian/rules (USE_64TO32): New variable for 64bit builds.
+  * debian/testsuite: Added tce_cc2_c2.
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 03 Oct 2015 19:40:42 +0200
+
+nwchem (6.5+r26243-5) unstable; urgency=medium
+
+  * debian/patches/16_deterministic_timestamp_in_ar_workaround.patch: New
+    patch, adds additional ar options that work around issues with
+    non-deterministic builds (Closes: #790628).
+  * debian/rules (USE_ARUR): New variable, activates the above change.
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 03 Oct 2015 16:06:32 +0200
+
+nwchem (6.5+r26243-4) unstable; urgency=medium
+
+  * debian/patches/02_makefile_flags.patch: Patch updated, to remove -m64 from
+    compiler flags on arm64 (Closes: #769525).
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 23 Nov 2014 17:35:50 +0100
+
+nwchem (6.5+r26243-3) unstable; urgency=medium
+
+  * debian/patches/02_makefile_flags.patch: Patch updated to remove additions
+    to $(FOPTIMIZE) which are not applicable to the baseline amd64
+    architecture (Closes: #767481).
+  * debian/patches/01_hardcode_basis-sets_location.patch: Reintroduced patch,
+    updated (Closes: #769297).
+
+ -- Michael Banck <mbanck@debian.org>  Thu, 13 Nov 2014 14:01:47 +0100
+
+nwchem (6.5+r26243-2) unstable; urgency=medium
+
+  * debian/patches/14_fix_ga_download.patch: Updated to surpress unnecessary
+    extraction of Global Arrays tarball, which results in reversing some
+    patches and leads to build failures.
+  * debian/rules (LIBMPI): Use -lmpif77 on mpich architectures.
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 12 Oct 2014 00:20:42 +0200
+
+nwchem (6.5+r26243-1) unstable; urgency=medium
+
+  * New upstream release.  New features include:
+    + Analytical TDDFT gradients
+    + Open and closed-shell CPHF (Raman spectra for TDDFT)
+    + Transition densities for excited states
+    + Analytical 2nd derivatives for Becke97 style XC functionals
+    + Spin-component scaled (SCS) MP2/CCSD
+    + Accurate calculation of Electron Affinities (EA) and Ionization
+      Potentials (IP) with equation-of-motion coupled-cluster theory
+      (IP/EA-EOMCCSD)
+    + Temperature accelerated molecular dynamics (TAMD)
+    + 2D surface geometry optimizations
+    + Frozen Phonon in BAND module
+    + Complete handling of space groups
+  * debian/patches/03_hurd-i386_define_path_max.patch: Updated, it was
+    modifying a no longer used version of the file, resulting in a build
+    failure on hurd-i386.
+  * debian/control (Priority): Set to optional.
+  * debian/rules (LIBMPI): Added -lmpi_f77.
+  * debian/TODO: Updated.
+  * debian/patches/03_hurd-i386_define_path_max.patch: Updated for new GA release.
+  * debian/patches/06_statfs_kfreebsd.patch: Likewise.
+  * debian/patches/07_ga_target_force_linux.patch: Likewise.
+  * debian/patches/11_fix_armci_locks.patch: Likewise.
+  * debian/patches/12_pythonlib_multiarch_path.patch: Updated.
+  * debian/patches/02_makefile_flags.patch: Updated.
+  * debian/upstream: Moved to debian/upstream/metadata.
+  * debian/patches/14_fix_ga_download.patch: New patch, avoids downloading GA
+    tarball if present already.
+  * debian/rules (GA_COPT, ARMCI_COPT): New variables, set CFLAGS for Global
+    Arrays build to '-g -O2'.
+  * debian/control (Build-Depends): Added libscalapack-mpi-dev.
+  * debian/rules (USE_SCALAPACK, SCALAPACK): New variables on 32bit arches,
+    enabling scalapack support.  This fixes some test suite crashes during
+    parallel diagonalization.
+  * debian/patches/15_testsuite_print_output_on_failure.patch: New patch,
+    prints the last 50 lines of a test output if NWChem execution fails during
+    the test.
+  * debian/testsuite: Update 'all' tests with current set of QM/MD tests of
+    upstream testsuite.
+  * debian/testsuite: Added tddftgrad_n2_uks.out, tddftgrad_ch2o,
+    tce_eaccsd_ozone, tce_ipccsd_f2, tce_hyperpolar_ccsd_small, mp2_scs_n2,
+    cosmo_h3co, h2o_selci, n2_ccsd, pspw_md, pspw_stress and qmmm_grad0.
+  * debian/patches/01_hardcode_basis-sets_location.patch: Removed, no longer
+    needed.
+  * debian/rules (IPCCSD, EACCSD): New variable, enabling IP/EA functionality
+    for EOMCCSD.
+  * debian/control (Description): Updated for new features.
+  * debian/rules (RUNTESTS): Switched to runtests.mpi.unix.
+  * debian/patches/04_show_testsuite_diff_output.patch: Updated for new
+    $(RUNTESTS) script.  
+  * debian/patches/15_testsuite_print_output_on_failure.patch: Likewise.
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 11 Oct 2014 14:41:59 +0200
+
+nwchem (6.3+r2-3) unstable; urgency=medium
+
+  * debian/rules (CCSDTLR): New variable, enables the CCSDT linear response
+    code if `ccsdtlr' is set in DEB_BUILD_OPTIONS.
+  * debian/rules (DEB_HOST_ARCH): New variable, seeded from dpkg-architecture.
+  * debian/rules (GCC49_ARM_BROKEN): New variable, defined on armhf.
+  * debian/patches/13_armhf_noopt.patch: New patch, adds -O1 to FFLAGS for the
+    tce/mrcc submodule if GCC49_ARM_BROKEN is defined, fixing gfortran-4.9 bad
+    assembler generation on armhf.
+
+ -- Michael Banck <mbanck@debian.org>  Thu, 25 Sep 2014 10:40:25 +0200
+
+nwchem (6.3+r2-2) unstable; urgency=medium
+
+  * debian/TODO: Updated.
+  * debian/testsuite: Removed cosmo_h3co_ecp test case as it crashes on a lot
+    of architectures and results in a hang on powerpc.
+  * debian/nwchem.install: Moved installation of user manual to ...
+  * debian/nwchem-data.install: ... here.
+  * debian/control (Build-Depends): Changed texlive to texlive-latex-base.
+  * debian/rules (override_dh_auto_build): Split up into
+    override_dh_auto_build-arch and override_dh_auto_build-indep, building the
+    user manual in the latter.
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 21 Sep 2014 17:58:39 +0200
+
+nwchem (6.3+r2-1) unstable; urgency=low
+
+  * New upstream point release.
+
+  [ Michael Banck ]
+  * debian/upstream: Added upstream repository URL.
+  * debian/patches/02_makefile_flags.patch: Refreshed.
+  * debian/control (Build-Depends): Replaced gfortran-4.7 with gfortran and
+    removed gcc-4.7 (Closes: #748007).
+  * debian/patches/10_force_gcc-4.7.patch: Removed.
+  * debian/patches/02_makefile_flags.patch: Added
+    -fno-aggressive-loop-optimizations to FOPTIONS.
+  * debian/testsuite: Update all tests with current set of tests and fix MD
+    tests.
+  * debian/testsuite: Update dplot quick test to dplot_dft.
+
+  [ Daniel Leidert ]
+  * debian/control (Standards-Version): Bumped to 3.9.5.
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 14 Sep 2014 18:29:01 +0200
+
+nwchem (6.3+r1-1) unstable; urgency=low
+
+  * New upstream release.
+
+  [ Daniel Leidert ]
+  * debian/control (Vcs-Browser, Vcs-Svn): Fixed vcs-field-not-canonical.
+    (Build-Depends): Added autotools-dev. Added version for python dependency
+    for dh_python2 addon.
+    (Standards-Version): Bumped to 3.9.4.
+    (Description): Fixed extended-description-line-too-long.
+  * debian/rules: Run dh with autotools_dev and python2 addons.
+  * debian/watch: Updated to catch revision releases.
+
+ -- Debichem Team <debichem-devel@lists.alioth.debian.org>  Sun, 04 Aug 2013 11:20:49 +0200
+
+nwchem (6.3-3) unstable; urgency=low
+
+  * debian/patches/02_makefile_flags.patch: Remove most warnings from C/Fortran
+    flags in order to reduce the build log size.
+  * debian/patches/10_force_gcc-4.7.patch: Adjusted.
+
+ -- Michael Banck <mbanck@debian.org>  Mon, 08 Jul 2013 17:28:04 +0200
+
+nwchem (6.3-2) unstable; urgency=low
+
+  [ Michael Banck ]
+  * debian/control (Description): Updated.
+  * debian/patches/09_backported_6.1.1_fixes.patch: Removed, no longer needed.
+  * debian/patches/11_fix_armci_locks.patch: New patch, defines SPINLOCK as
+    locking strategy, fixes build failures on arm*, mips* and s390*.
+  * debian/patches/12_pythonlib_multiarch_path.patch: New patch, adjusts the
+    python library path to account for multiarch.
+  * debian/patches/02_makefile_flags.patch: Do not set -m64 for 64bit targets,
+    and harmonize C/Fortran options.  Refresh patch 10_force_gcc-4.7.patch
+    accordingly.
+  * debian/patches/02_makefile_flags.patch: Added -lz to libraries required for
+    linking libpython.
+  * debian/testsuite: Added test for python interface.
+  * debian/control (Build-Depends): Added zlib1g-dev.
+  * debian/rules (override_dh_auto_build): Do not make version.
+
+  [ Daniel Leidert ]
+  * debian/control: Added X-Python-Version.
+    (Build-Depends): Added python-dev. Use texlive to fix manual build.
+    (Standards-Version): Bumped to recent 3.9.3.
+  * debian/nwchem.1: Added.
+  * debian/nwchem.doc-base: Ditto.
+  * debian/nwchem.lintian-overrides: Ditto.
+  * debian/nwchem.manpages: Ditto.
+  * debian/nwchem-data.lintian-overrides: Ditto.
+  * debian/rules: Added PYTHONVERSION, PYTHONHOME. Enable parallel building.
+    (NWCHEM_MODULES): Build with python support (pnnl).
+  * debian/patches/02_makefile_flags.patch: Adjusted.
+    - src/config/makefile.h: Fix linker flags building with python support.
+
+ -- Michael Banck <mbanck@debian.org>  Mon, 08 Jul 2013 03:11:26 +0200
+
+nwchem (6.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fixes anisotropic properties (Closes: #696361).
+  * New features include:
+    + Multi-reference coupled cluster (MRCC) approaches
+    + Hybrid DFT calculations with short-range HF 
+    + New density-functionals including Minnesota (M08, M11) and HSE hybrid
+      functionals
+    + X-ray absorption spectroscopy (XAS) with TDDFT
+    + Analytical gradients for the COSMO solvation model
+    + Transition densities from TDDFT 
+    + DFT+U and Electron-Transfer (ET) methods for plane wave calculations
+    + Exploitation of space group symmetry in plane wave geometry optimizations
+    + Local density of states (LDOS) collective variable added to Metadynamics
+    + Various new XC functionals added for plane wave calculations, including
+      hybrid and range-corrected ones
+    + Electric field gradients with relativistic corrections 
+    + Nudged Elastic Band optimization method
+    + Updated basis sets and ECPs 
+
+  [ Daniel Leidert ]
+  * debian/watch: Fixed.
+
+  [ Andreas Tille ]
+  * debian/upstream: References
+
+  [ Michael Banck ]
+  * debian/upstream (Name): New field.
+  * debian/patches/02_makefile_flags.patch: Refreshed.
+  * debian/patches/06_statfs_kfreebsd.patch: Likewise.
+  * debian/patches/07_ga_target_force_linux.patch: Likewise.
+  * debian/patches/05_avoid_inline_assembler.patch: Removed, no longer needed.
+  * debian/patches/09_backported_6.1.1_fixes.patch: Likewise.
+  * debian/control (Build-Depends): Added gfortran-4.7 and gcc-4.7.
+  * debian/patches/10_force_gcc-4.7.patch: New patch, explicitly sets
+    gfortran-4.7 and gcc-4.7, fixes test suite hang with gcc-4.8 (Closes:
+    #701328, #713262).
+  * debian/testsuite: Added tests for COSMO analytical gradients and MRCC.
+  * debian/rules (MRCC_METHODS): New variable, required to enable MRCC methods.
+
+ -- Michael Banck <mbanck@debian.org>  Thu, 04 Jul 2013 12:14:55 +0200
+
+nwchem (6.1-6) unstable; urgency=low
+
+  * debian/patches/02_makefile_flags.patch: Add GCC46 to defines (Closes:
+    #696349).
+
+ -- Michael Banck <mbanck@debian.org>  Tue, 25 Dec 2012 22:07:17 +0100
+
+nwchem (6.1-5) unstable; urgency=low
+
+  * Reverted subversion revisions 3824, 3834 and 3876. 
+
+ -- Michael Banck <mbanck@debian.org>  Fri, 14 Dec 2012 14:44:22 +0100
+
+nwchem (6.1-4) unstable; urgency=low
+
+  [ Michael Banck ]
+  * debian/patches/09_backported_6.1.1_fixes.patch: New patch, backports the
+    source code changes of the nwchem-6.1.1 bugfix release (Closes: #695540):
+    + PW: Fixed backspace issues on file I/O that caused I/O errors.
+    + DFT: Removed dummy and bq centers from the Grimme dispersion
+      corrections.
+    + DFT: Fixed a race condition in the density fitting code.
+    + DFT: Added a check for singularities in the HCTH functionals.
+    + DFT: Fixed a problem with the DFT grids which caused strange behaviors
+      if the number of cores is so large that some cores do not get any grid
+      points.
+    + HF&DFT: Fixed rolling back to distributed memory Fock-builder if not
+      enough memory is available to use the replicated data one. Previously
+      the code would crash trying to use non-existing GAs.
+    + HF&DFT: Fixed clashes between MPI and GA communication when using OpenIB
+      which enhances the stability.
+    + MP2&DFT: On systems with limited I/O capabilities some quantities like
+      2-electron integrals and DFT grids are now stored in memory rather than
+      on disk.
+    + CASSCF: Added ga_sync to fix race conditions that can cause the Davidson
+      diagonalizer to fail.
+    + CASSCF: Fixed a problem with the phase in the Lagrangian that caused
+      problems with the gradient evaluation.
+    + RAMAN: A number of problems with static polarizabilities were fixed.
+    + Property: Fixed an issue with add_patch that caused unexpected results
+      with dynamic polarizabilities.
+    + DRDY: Removed system calls to copy files avoiding forking from NWChem
+      processes which is relatively likely to fail due to the resources
+      attached to such a process.
+    + Input: Fixed some issues with GEOM LOAD that caused the selection of
+      centers to fail in some cases.
+    + Geometry: Dummy centers are no longer removed from a geometry so that
+      constraints involving those centers remain valid.
+    + Memory: All shared memory (global memory region) is now allocated at the
+      start.
+
+  [ Daniel Leidert ]
+  * debian/control: Added X-Python-Version.
+    (Build-Depends): Added python-dev. Use texlive to fix manual build.
+    (Standards-Version): Bumped to recent 3.9.3.
+  * debian/nwchem.1: Added.
+  * debian/nwchem.doc-base: Ditto.
+  * debian/nwchem.lintian-overrides: Ditto.
+  * debian/nwchem.manpages: Ditto.
+  * debian/nwchem-data.lintian-overrides: Ditto.
+  * debian/rules: Added PYTHONVERSION, PYTHONHOME. Enable parallel building.
+    (NWCHEM_MODULES): Build with python support (pnnl).
+  * debian/patches/02_makefile_flags.patch: Adjusted.
+    - src/config/makefile.h: Fix linker flags building with python support.
+
+ -- Michael Banck <mbanck@debian.org>  Thu, 13 Sep 2012 14:35:37 +0200
+
+nwchem (6.1-3) unstable; urgency=low
+
+  * debian/testsuite: Removed cosmo_trichloroethene, as it takes much longer
+    than the others tests and does not provide any obvious additional coverage
+    compared to cosmo_h2o.
+  * debian/control (Description): Overhauled.
+  * debian/control (Build-Depends): Switch from texlive-latex-base to
+    texlive-latex-recommended (Closes: #666315).
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 31 Mar 2012 12:04:19 +0200
+
+nwchem (6.1-2) unstable; urgency=low
+
+  * debian/patches/05_avoid_inline_assembler.patch: New patch, avoids the
+    inlining of assembler on architectures other than i386 and amd64.
+  * debian/patches/02_makefile_flags.patch: Updated to also set peigs/DEFS to
+    useful values, avoids unconditional use of ifort as fortran compiler on
+    ia64. 
+  * debian/patches/06_statfs_kfreebsd.patch: New patch, fixes header files for
+    statfs definitions on kfreebsd-*.
+  * debian/patches/07_ga_target_force_linux.patch: New patch, forces the
+    Global Arrays TARGET variable to LINUX on s390*. 
+  * debian/patches/08_lapack_constants_headers.patch: New patch, fixes
+    platform definitions so that the lapack symbols get defined.
+
+ -- Michael Banck <mbanck@debian.org>  Sat, 11 Feb 2012 19:38:26 +0100
+
+nwchem (6.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+  [ Michael Banck ]
+  * debian/patches/02_makefile_flags.patch: Updated.
+  * debian/patches/02_makefile_flags.patch: Use internal blas and lapack code.
+  * debian/patches/02_makefile_flags.patch: Define GCC4 for LINUX and LINUX64
+    (Closes: #632611 and LP: #791308).
+  * debian/control (Build-Depends): Added openssh-client.
+  * debian/rules (USE_SCALAPACK, SCALAPACK): Removed variables (Closes:
+    #654658).
+  * debian/rules (LIBDIR, USE_MPIF4, ARMCI_NETWORK): New variables.
+  * debian/TODO: New file.
+  * debian/control (Build-Depends): Removed libblas-dev, liblapack-dev and
+    libscalapack-mpi-dev.
+  * debian/patches/04_show_testsuite_diff_output.patch: New patch, shows the
+    diff output for failed tests.
+  * debian/patches/series: Adjusted.
+  * debian/testsuite: Optionally run all tests if "all" is passed as option.
+  * debian/rules: Run debian/testsuite with "all" if DEB_BUILD_OPTIONS
+    contains "checkall".
+
+  [ Daniel Leidert ]
+  * debian/control: Used wrap-and-sort. Added Vcs-Svn and Vcs-Browser fields.
+    (Priority): Moved to extra according to policy section 2.5.
+    (Standards-Version): Bumped to 3.9.2.
+    (Description): Fixed a typo.
+  * debian/watch: Added.
+  * debian/patches/03_hurd-i386_define_path_max.patch: Added.
+    - Define MAX_PATH if not defines to fix FTBFS on hurd.
+  * debian/patches/series: Adjusted.
+
+ -- Michael Banck <mbanck@debian.org>  Thu, 09 Feb 2012 20:02:41 +0100
+
+nwchem (6.0-2) unstable; urgency=low
+
+  * debian/control (Description): Overhaul, specifying the various NWChem
+    features.
+  * debian/nwchem.links: Renamed to...
+  * debian/nwchem-data.links: ... this.
+  * debian/nwchem-data.links: Added a symlink for the pseudo-potential
+    library.
+  * debian/nwchem-data.dirs: New file. 
+  * debian/testsuite: Add some more tests.
+  * debian/control (Build-Depends): Added mpi-default-dev. 
+  * debian/rules (USE_MPI, USE_MPIF, LIBMPI, MPI_LIB, MPI_INCLUDE): New
+    variables.
+  * debian/rules (CCSDTQ): New variable, gets set if DEB_BUILD_OPTIONS
+    includes "ccsdtq".
+  * debian/rules (override_dh_auto_build): Do not touch stamp file. 
+  * debian/nwchem.install: Do not ship the programmer's manual for now. 
+  * debian/rules (override_dh_auto_test): Do not abort build on testsuite
+    failures. 
+  * debian/control (Build-Depends): Added libblas-dev, liblapack-dev,
+    libscalapack-mpi-dev and libblacs-mpi-dev,. 
+  * debian/rules (HAS_BLAS, BLASOPT, USE_SCALAPACK, SCALAPACK, BLACS): New
+    variables.
+  * debian/patches/02_makefile_flags.patch: New patch, force gfortran defaults
+    to all applicable architectures.
+  * debian/control (Build-Depends): Added mpi-default-bin.
+  * debian/control (nwchem/Depends): Added mpi-default-bin.
+  * debian/rules (override_dh_clean): Remove src/tools/lib and QA/scratchdir
+    directories as well.
+  * debian/rules: Include /usr/share/mpi-default-dev/debian_defaults.
+  * debian/rules (SCALAPACK, BLACS): Use $(ARCH_DEFAULT_MPI_IMPL) variable to
+    specify library names.
+
+ -- Michael Banck <mbanck@debian.org>  Wed, 28 Sep 2011 00:28:20 +0200
+
+nwchem (6.0-1) unstable; urgency=low
+
+  * Initial upload (Closes: #598728).
+
+ -- Michael Banck <mbanck@debian.org>  Mon, 25 Apr 2011 10:15:12 +0200

@@ -1,0 +1,28 @@
+Index: nwchem-6.8/src/tce/mrcc/GNUmakefile
+===================================================================
+--- nwchem-6.8.orig/src/tce/mrcc/GNUmakefile
++++ nwchem-6.8/src/tce/mrcc/GNUmakefile
+@@ -1,13 +1,13 @@
+ 
+ SUBDIRS = include ccsd ccsd_sub ccsd_t uss
+ 
+-OBJ = tce_mrcc_input.o
++OBJ = tce_mrcc_input.o tce_mrcc_energy.o 
+ 
+ #OBJ_OPTIMIZE = tce_mrcc_energy.o tce_mrcc_create_cas.o tce_mrcc_readref.o tce_mrcc_calcexcit.o tce_mrcc_sortint.o \
+ #OBJ_OPTIMIZE = tce_mrcc_energy.o tce_mrcc_init.o tce_mrcc_create_cas.o tce_mrcc_readref.o tce_mrcc_calcexcit.o tce_mrcc_sortint.o 
+ #OBJ_OPTIMIZE =  tce_mrcc_energy.o tce_mrcc_create_cas.o tce_mrcc_readref.o tce_mrcc_calcexcit.o tce_mrcc_sortint.o \
+ 
+-OBJ_OPTIMIZE =  tce_mrcc_energy.o tce_mrcc_readref.o tce_mrcc_calcexcit.o tce_mrcc_sortint.o \
++OBJ_OPTIMIZE =  tce_mrcc_readref.o tce_mrcc_calcexcit.o tce_mrcc_sortint.o \
+ 		tce_mrcc_tile.o tce_mrcc_macpy.o tce_mrcc_fillindexarray.o tce_mrcc_uhf.o create_mr_evl_sorted.o \
+ 		pgcreatefile.o tce_mrcc_mo2e.o tce_mrcc_ao2e.o tce_subnxtask.o tce_mrcc_sublock.o eaf_mrcc.o \
+ 		tce_t3ac_offset.o tce_t4ac_offset.o tce_mrcc_refs_sym.o tce_mrcc_force_orben.o \
+@@ -64,3 +64,7 @@ endif
+ include ../../config/makefile.h
+ include ../../config/makelib.h
+ 
++ifdef GCC49_ARM_BROKEN
++# gfortran-4.9 on ARM generates bad assembler at -O2 or higher
++FDEBUG = -O1
++endif

@@ -1,0 +1,12 @@
+Name: NWChem
+Repository: https://svn.pnl.gov/svn/nwchem/trunk
+Reference:
+  Author: "M. Valiev and E.J. Bylaska and N. Govind and K. Kowalski and T.P. Straatsma and H.J.J. van Dam and D. Wang and J. Nieplocha and E. Apra and T.L. Windus and W.A. de Jong"
+  Title: "NWChem: a comprehensive and scalable open-source solution for large scale molecular simulations"
+  Journal: Comput. Phys. Commun.
+  Year: 2010
+  Volume: 181
+  Number: 9
+  Pages: 1477-1489
+  DOI: 10.1016/j.cpc.2010.04.018
+  URL: http://www.sciencedirect.com/science/article/pii/S0010465510001438

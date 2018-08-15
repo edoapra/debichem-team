@@ -1,0 +1,11 @@
+--- a/src/peigs/h/blas_lapack.h
++++ b/src/peigs/h/blas_lapack.h
+@@ -144,7 +144,7 @@
+ 
+ 
+ #endif
+-#ifdef PENTIUM
++#if defined(LINUX) || defined(LINUX64)
+ /* wild ass guess; same as sparc */
+ #define DLAMCHE 2.2204460492503131e-16
+ #define DLAMCHP 2.2204460492503131e-16

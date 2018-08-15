@@ -1,0 +1,2 @@
+nwchem-data: symlink-is-self-recursive usr/share/nwchem/libraries/basis ..
+nwchem-data: symlink-is-self-recursive usr/share/nwchem/libraryps/nwpw/libraryps ..

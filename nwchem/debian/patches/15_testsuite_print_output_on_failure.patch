@@ -1,0 +1,12 @@
+Index: nwchem-6.8/QA/runtests.mpi.unix
+===================================================================
+--- nwchem-6.8.orig/QA/runtests.mpi.unix
++++ nwchem-6.8/QA/runtests.mpi.unix
+@@ -233,6 +233,7 @@ foreach TEST_in ($args_2_use)
+   if (! -f $TESTDIR/$INPUTFILE) then
+     echo failed: cannot access $TESTDIR/$INPUTFILE
+     set overall_status = 1
++    tail -50 $TESTOUTPUTS/$OUTPUTFILE
+     continue
+   endif
+  set INPUTFILE=$NWCHEM_TOP/QA/$TESTDIR/$INPUTFILE 

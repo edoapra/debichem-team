@@ -1,0 +1,15 @@
+Debian TODO for NWChem
+======================
+
+1. Replace NWChem internal blas/lapack code with linking to standard
+refblas/lapack or ATLAS libraries.  Currently, the amd64 packages result in
+testsuite failures due to crashes in ARMCI/Global Arrays (GA) for lapack calls
+when linked against external linear algebra libraries.
+
+2. Replace NWChem internal ARMCI/GA libraries with linking to
+external (to be packaged) GA libraries.  For NWChem-6.5, GA-5.3 is used.
+
+3. Reintroduce use of scalapack.  Building with scalapack and linking to the
+libraries has been disabled in nwchem_6.1-1.
+
+4. NWChem segfaults if no input file is given on the command line.

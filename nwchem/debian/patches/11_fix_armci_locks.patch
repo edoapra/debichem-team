@@ -1,0 +1,34 @@
+Index: nwchem-6.6/src/tools/ga-5.6.3/armci/src/include/locks.h
+===================================================================
+--- nwchem-6.6.orig/src/tools/ga-5.6.3/armci/src/include/locks.h
++++ nwchem-6.6/src/tools/ga-5.6.3/armci/src/include/locks.h
+@@ -12,8 +12,13 @@
+ #   include "spinlock.h"
+ #endif
+ 
+-#if !(defined(PMUTEX) || defined(PSPIN) || defined(SPINLOCK))
+-#   error cannot run
++#if defined(PTHREADS) && !(defined(PMUTEXES) || defined(SPINLOCK)||defined(QUADRICS))
++# if defined(LINUX) && defined(__sparc__) && defined(GM)
++#    define PMUTEXES
++#    include <pthread.h>
++# else
++     cannot run
++# endif
+ #endif
+ 
+ #if (defined(SPINLOCK) || defined(PMUTEX) || defined(PSPIN) || defined(HITACHI)) && !(defined(BGML) || defined(DCMF))
+Index: nwchem-6.6/src/tools/ga-5.6.3/armci/src/locks/locks.c
+===================================================================
+--- nwchem-6.6.orig/src/tools/ga-5.6.3/armci/src/locks/locks.c
++++ nwchem-6.6/src/tools/ga-5.6.3/armci/src/locks/locks.c
+@@ -13,7 +13,9 @@
+ #   include <stdio.h>
+ #endif
+ 
++#if defined(SPINLOCK)
+ PAD_LOCK_T *_armci_int_mutexes;
++#endif
+ 
+ #if !defined(armci_die)
+ extern void armci_die(char*,int);

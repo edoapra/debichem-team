@@ -1,0 +1,10 @@
+01_hardcode_basis-sets_location.patch
+02_makefile_flags.patch
+#03_hurd-i386_define_path_max.patch
+04_show_testsuite_diff_output.patch
+#06_statfs_kfreebsd.patch
+#07_ga_target_force_linux.patch
+08_lapack_constants_headers.patch
+12_pythonlib_multiarch_path.patch
+13_armhf_noopt.patch
+15_testsuite_print_output_on_failure.patch
