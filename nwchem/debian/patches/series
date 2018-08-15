@@ -8,3 +8,4 @@
 12_pythonlib_multiarch_path.patch
 13_armhf_noopt.patch
 15_testsuite_print_output_on_failure.patch
+16_srcmakefile.patch
