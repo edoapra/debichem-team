@@ -12,10 +12,10 @@ override_dh_auto_configure:
 		--enable-cxx 				\
 		--with-tcgmsg				\
 		--with-scalapack="-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)" \
-		--with-blas=-lblas 			\
-		--with-lapack=-llapack			\
+		--with-blas4=-lopenblas 			\
+		--with-lapack=-lopenblas			\
 		--with-mpi				\
-		--with-armci=/usr
+		--with-mpi-ts
 
 override_dh_auto_install:
 	dh_auto_install --destdir=$(CURDIR)/debian/tmp
@@ -24,7 +24,7 @@ override_dh_auto_install:
 	rm -f $(CURDIR)/debian/tmp/usr/include/scope.h
 	rm -f $(CURDIR)/debian/tmp/usr/include/string-util.h
 	rm -f $(CURDIR)/debian/tmp/usr/include/table.h
-	
+
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 override_dh_auto_test:
 	-dh_auto_test -- -j1 -k ARMCI_USE_WIN_ALLOCATE=1 MPIEXEC="mpiexec -np 4"

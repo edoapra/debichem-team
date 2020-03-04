@@ -5,9 +5,7 @@ Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
 Uploaders: Michael Banck <mbanck@debian.org>
 Build-Depends: debhelper-compat (= 12),
                gfortran,
-               libarmci-mpi-dev,
-               libblas-dev,
-               liblapack-dev,
+	       libopenblas-dev,
                libscalapack-mpi-dev (>= 2),
                mpi-default-dev,
                openssh-client
