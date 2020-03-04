@@ -1,0 +1,13 @@
+--- a/m4/ga_target.m4
++++ b/m4/ga_target.m4
+@@ -68,9 +68,9 @@
+         [*cygwin*],         [ga_cv_target_base=CYGWIN],
+         [*fujitsu*],        [ga_cv_target_base=FUJITSU_VPP],
+         [*hpux*],           [ga_cv_target_base=HPUX],
++        [*linux*],          [ga_cv_target_base=LINUX],
+         [*ibm*],            [ga_cv_target_base=IBM],
+         #[TODO],            [ga_cv_target_base=LAPI],
+-        [*linux*],          [ga_cv_target_base=LINUX],
+         [*darwin*],         [ga_cv_target_base=MACX],
+         [*apple*],          [ga_cv_target_base=MACX],
+         [*mingw32*],        [ga_cv_target_base=MINGW],

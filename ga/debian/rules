@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+CFLAGS=-g -O2
+
+include /usr/share/mpi-default-dev/debian_defaults
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- 				\
+		--enable-cxx 				\
+		--with-tcgmsg				\
+		--with-scalapack="-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)" \
+		--with-blas=-lblas 			\
+		--with-lapack=-llapack			\
+		--with-mpi				\
+		--with-armci=/usr
+
+override_dh_auto_install:
+	dh_auto_install --destdir=$(CURDIR)/debian/tmp
+	rm -f $(CURDIR)/debian/tmp/usr/include/error.h
+	rm -f $(CURDIR)/debian/tmp/usr/include/memcpy.h
+	rm -f $(CURDIR)/debian/tmp/usr/include/scope.h
+	rm -f $(CURDIR)/debian/tmp/usr/include/string-util.h
+	rm -f $(CURDIR)/debian/tmp/usr/include/table.h
+	
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
+override_dh_auto_test:
+	-dh_auto_test -- -j1 -k ARMCI_USE_WIN_ALLOCATE=1 MPIEXEC="mpiexec -np 4"
+endif

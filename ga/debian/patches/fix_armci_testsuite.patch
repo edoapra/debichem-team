@@ -1,0 +1,11 @@
+--- a/armci/Makefile.am
++++ b/armci/Makefile.am
+@@ -52,7 +52,7 @@
+ 
+ if ARMCI_NETWORK_COMEX
+ ARMCI_NETWORK_CPPFLAGS += -I$(abs_srcdir)/../comex/src-armci
+-ARMCI_NETWORK_LDFLAGS += -L$(abs_builddir)/../comex
++ARMCI_NETWORK_LDFLAGS += -L$(abs_builddir)/../comex -lblas -llapack
+ ARMCI_NETWORK_LIBS += $(abs_builddir)/../comex/libarmci.la
+ endif
+ 

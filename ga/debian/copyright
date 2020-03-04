@@ -1,0 +1,231 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Source: http://hpc.pnl.gov/globalarrays/index.shtml
+
+Files: *
+Copyright: 2006 Battelle Memorial Institute
+License: GlobalArrays
+
+Files: armci/src/include/asm-ia64.h
+Copyright: 2003 Hewlett-Packard Company
+License: GlobalArrays
+
+Files: armci/src/common/noncont.c armci/testing/test_mt.c
+Copyright: 2006-2007 Pacific Northwest National Laboratory
+License: GlobalArrays
+
+Files: armci/examples/benchmarks/cg/armci_sharedmemory/timing.c
+       armci/examples/benchmarks/lu/armci_nonblocking/timing.c
+       armci/examples/benchmarks/lu/armci_blocking/timing.c
+       armci/examples/benchmarks/lu/armci_multithreaded/timing.c
+       armci/examples/benchmarks/lu/pthreads/timing.c
+       armci/examples/benchmarks/RandomAccess/timing.c
+Copyright: 1995 PDCL Corporation
+License: GlobalArrays
+
+License: GlobalArrays
+ 1. Battelle Memorial Institute (hereinafter Battelle) hereby grants permission
+ to any person or entity lawfully obtaining a copy of this software and
+ associated documentation files (hereinafter "the Software") to redistribute
+ and use the Software in source and binary forms, with or without modification.
+ Such person or entity may use, copy, modify, merge, publish, distribute,
+ sublicense, and/or sell copies of the Software, and may permit others to do
+ so, subject to the following conditions:
+ .
+ * Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimers.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ * Other than as used herein, neither the name Battelle Memorial Institute or
+   Battelle may be used in any form whatsoever without the express written
+   consent of Battelle.   
+ .
+ 2. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL BATTELLE OR CONTRIBUTORS BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ .
+ 3. The Software was produced by BMI under Contract No. DE-AC05-76RL01830 with
+ the Department of Energy.  For five (5) years from February 23, 2006, the
+ Government is granted for itself and others acting on its behalf a
+ nonexclusive, paid-up, irrevocable worldwide license in this data to
+ reproduce, prepare derivative works, and perform publicly and display
+ publicly, by or on behalf of the Government.  There is provision for the
+ possible extension of the term of this license.  Subsequent to that period or
+ any extension granted, the Government is granted for itself and others acting
+ on its behalf a nonexclusive, paid-up, irrevocable worldwide license in this
+ data to reproduce, prepare derivative works, distribute copies to the public,
+ perform publicly and display publicly, and to permit others to do so.  The
+ specific term of the license can be identified by inquiry made to Battelle or
+ DOE.  Neither the United States nor the United States Department of Energy,
+ nor any of their employees, makes any warranty, express or implied, or assumes
+ any legal liability or responsibility for the accuracy, completeness or
+ usefulness of any data, apparatus, product or process disclosed, or represents
+ that its use would not infringe privately owned rights.  
+
+Files: armci/src/devices/openib/cbuf.*
+Copyright: 1999-2001 The Regents of the University of California
+           2002-2008 The Ohio State University
+License: MPICH
+           COPYRIGHT
+ .
+ The following is a notice of limited availability of the code, and disclaimer
+ which must be included in the prologue of the code and in all source listings
+ of the code.
+ .
+ Copyright Notice
+ + 2002 University of Chicago
+ .
+ Permission is hereby granted to use, reproduce, prepare derivative works, and
+ to redistribute to others.  This software was authored by:
+ .
+ Argonne National Laboratory Group
+ W. Gropp: (630) 252-4318; FAX: (630) 252-5986; e-mail: gropp@mcs.anl.gov
+ E. Lusk:  (630) 252-7852; FAX: (630) 252-5986; e-mail: lusk@mcs.anl.gov
+ Mathematics and Computer Science Division
+ Argonne National Laboratory, Argonne IL 60439
+ .
+ .
+             GOVERNMENT LICENSE
+ .
+ Portions of this material resulted from work developed under a U.S.
+ Government Contract and are subject to the following license: the Government
+ is granted for itself and others acting on its behalf a paid-up, nonexclusive,
+ irrevocable worldwide license in this computer software to reproduce, prepare
+ derivative works, and perform publicly and display publicly.
+ .
+           DISCLAIMER
+ .
+ This computer code material was prepared, in part, as an account of work
+ sponsored by an agency of the United States Government.  Neither the United
+ States, nor the University of Chicago, nor any of their employees, makes any
+ warranty express or implied, or assumes any legal liability or responsibility
+ for the accuracy, completeness, or usefulness of any information, apparatus,
+ product, or process disclosed, or represents that its use would not infringe
+ privately owned rights.
+ .
+ Portions of this code were written by Microsoft. Those portions are
+ Copyright (c) 2007 Microsoft Corporation. Microsoft grants permission to
+ use, reproduce, prepare derivative works, and to redistribute to
+ others. The code is licensed "as is." The User bears the risk of using
+ it. Microsoft gives no express warranties, guarantees or
+ conditions. To the extent permitted by law, Microsoft excludes the
+ implied warranties of merchantability, fitness for a particular
+ purpose and non-infringement.
+
+Files: compat/random.c comex/compat/random.c
+Copyright: 1983 The Regents of the University of California
+License: UCBerkeley-like-MIT
+ Redistribution and use in source and binary forms are permitted
+ provided that the above copyright notice and this paragraph are
+ duplicated in all such forms and that any documentation,
+ advertising materials, and other materials related to such
+ distribution and use acknowledge that the software was developed
+ by the University of California, Berkeley.  The name of the
+ University may not be used to endorse or promote products derived
+ from this software without specific prior written permission.
+ THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR
+ IMPLIED WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED
+ WARRANTIES OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+Files: armci/src-gemini/ccopy.c armci/src-gemini/caccumulate.c
+       armci/src/common/ccopy.c armci/src/xfer/caccumulate.c
+       armci/src-portals/ccopy.c armci/src-portals/caccumulate.c
+       armci/src/xfer/caccumulate.c
+Copyright: 2009 University of Chicago
+License: public-domain-like
+ Permission is hereby granted to use, reproduce, prepare derivative works, and
+ to redistribute to others.
+
+Files: armci/src/include/atomic_ops_ia64.h
+Copyright: 2003 Marcel Moolenaar
+License: BSD-2
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ 1. Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+ 2. Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ SUCH DAMAGE.
+
+Files: armci/examples/features/non-blocking/overlap/overlap.c 
+       armci/examples/features/concurrency/multidma/multidma.c 
+       armci/examples/features/concurrency/simple/comdegree.c
+Copyright: Pacific Northwest National Laboratory
+License: BSD-3
+
+License: BSD-3
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ * Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS''
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS LTD BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+
+Files: python/docs/sc_11/FreeSerif.ttf
+Copyright: 2002-2009 Free Software Foundation.
+License: GPL-3+-with-font-exception
+
+License: GPL-3+-with-font-exception
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ As a special exception, if you create a document which uses this font, and
+ embed this font or unaltered portions of this font into the document, this
+ font does not by itself cause the resulting document to be covered by the
+ GNU General Public License. This exception does not however invalidate any
+ other reasons why the document might be covered by the GNU General Public
+ License. If you modify this font, you may extend this exception to your
+ version of the font, but you are not obligated to do so.  If you do not
+ wish to do so, delete this exception statement from your version.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Comment:
+ On Debian systems, the complete text of the GNU General Public License
+ version 3 can be found in "/usr/share/common-licenses/GPL-3".

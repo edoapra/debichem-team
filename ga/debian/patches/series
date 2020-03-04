@@ -1,0 +1,5 @@
+fix_ga_target.patch
+fix_armci_locks.patch
+fix_comex_testsuite.patch
+fix_armci_testsuite.patch
+testsuite_log_compiler.patch

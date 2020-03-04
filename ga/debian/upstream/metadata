@@ -1,0 +1,18 @@
+Name: Global Arrays
+Homepage: http://hpc.pnl.gov/globalarrays/index.shtml
+Reference:
+ - Author: Jarek Nieplocha and Bruce Palmer and Vinod Tipparaju and Manojkumar Krishnan and Harold Trease and Edo Apra
+   Title: "Advances, Applications and Performance of the Global Arrays Shared Memory Programming Toolkit"
+   Journal: Int. J. High Perform. Comput. Appl.
+   Year: 2006
+   Volume: 20
+   Number: 2
+   Pages: 203-231
+   DOI: 10.1177/1094342006064503
+   URL: http://hpc.sagepub.com/content/20/2/203.abstract
+   eprint: http://hpc.pnl.gov/globalarrays/papers/ga_acts.pdf
+ - Author: Manojkumar Krishnan and Bruce Palmer and Abhinav Vishnu and Sriram Krishnamoorthy and Jeff Daily and Daniel Chavarria
+   Title: "The Global Arrays User Manual"
+   Year: 2012
+   eprint: http://hpc.pnl.gov/globalarrays/papers/GA-UserManual-Main.pdf
+Registration: http://hpc.pnl.gov/globalarrays/form.shtml
