@@ -1,8 +1,8 @@
-diff --git a/src/config/makefile.h b/src/config/makefile.h
-index 46b2f35..28ccc45 100644
---- a/src/config/makefile.h
-+++ b/src/config/makefile.h
-@@ -1274,14 +1274,14 @@ endif
+Index: nwchem/src/config/makefile.h
+===================================================================
+--- nwchem.orig/src/config/makefile.h
++++ nwchem/src/config/makefile.h
+@@ -1277,14 +1277,14 @@ endif
  endif
  
  
@@ -19,7 +19,7 @@ index 46b2f35..28ccc45 100644
           CC = gcc
       RANLIB = ranlib
    MAKEFLAGS = -j 1 --no-print-directory
-@@ -1305,7 +1305,7 @@ ifeq ($(TARGET),$(findstring $(TARGET),LINUX CYGNUS CYGWIN INTERIX))
+@@ -1308,7 +1308,7 @@ ifeq ($(TARGET),$(findstring $(TARGET),L
     endif
     endif
  
@@ -28,7 +28,7 @@ index 46b2f35..28ccc45 100644
                   awk ' /sparc/ { print "sparc" }; /i*86/ { print "x86" };  /ppc*/ { print "ppc"};  /arm*/ { print "arm"}; /mips*/ { print "mips"} ' )
  
       GOTMINGW32= $(shell $(CC) -dM -E - </dev/null 2> /dev/null |grep MINGW32|cut -c21)
-@@ -1324,7 +1324,7 @@ ifeq ($(BUILDING_PYTHON),python)
+@@ -1327,7 +1327,7 @@ ifeq ($(BUILDING_PYTHON),python)
  #   EXTRA_LIBS += -L/home/edo/tcltk/lib/LINUX -ltk8.3 -ltcl8.3 -L/usr/X11R6/lib -lX11 -ldl
  # needed if python was built with pthread support
    ifneq ($(GOTMINGW32),1)
@@ -37,7 +37,7 @@ index 46b2f35..28ccc45 100644
    endif
  endif
  
-@@ -1334,7 +1334,7 @@ endif
+@@ -1337,7 +1337,7 @@ endif
        COPTIONS   = -Wall
        COPTIMIZE  = -g -O2
        ifeq ($(_FC),gfortran)
@@ -46,7 +46,7 @@ index 46b2f35..28ccc45 100644
          FOPTIMIZE  += -ffast-math -Wuninitialized
          DEFINES  += -DGFORTRAN
          GNUMAJOR=$(shell $(FC) -dumpversion | cut -f1 -d.)
-@@ -1371,7 +1371,7 @@ ifeq ($(LINUXCPU),x86)
+@@ -1374,7 +1374,7 @@ ifeq ($(LINUXCPU),x86)
      DEFINES += -DCYGWIN -DCYGNUS
    endif
    
@@ -55,7 +55,7 @@ index 46b2f35..28ccc45 100644
  
        ifeq ($(FC),g77)
    _G77V33= $(shell g77 -v  2>&1|egrep spec|head -n 1|awk ' /3.3/  {print "Y"}')
-@@ -1621,7 +1621,7 @@ ifeq ($(LINUXCPU),x86)
+@@ -1624,7 +1624,7 @@ ifeq ($(LINUXCPU),x86)
  endif
  #EXTRA_LIBS +=-lefence # link against Electricfence
  
@@ -64,7 +64,7 @@ index 46b2f35..28ccc45 100644
  
  # end of Linux, Cygnus
  endif
-@@ -1745,9 +1745,6 @@ endif
+@@ -1748,9 +1748,6 @@ endif
           DEFINES  +=-DMPICH_NO_ATTR_TYPE_TAGS
        endif
        ifeq ($(_FC),gfortran)
@@ -74,7 +74,7 @@ index 46b2f35..28ccc45 100644
          COPTIONS += -Wall
         ifdef  USE_FPE
           FOPTIONS += -ffpe-trap=invalid,zero,overflow  -fbacktrace
-@@ -2228,7 +2225,7 @@ $(error )
+@@ -2246,7 +2243,7 @@ $(error )
            FOPTIONS +=  -ff2c -fno-second-underscore
          endif
          ifeq ($(GNU_GE_4_6),true) 
@@ -83,16 +83,16 @@ index 46b2f35..28ccc45 100644
            FOPTIONS += -finline-functions
          endif
  #        FVECTORIZE  += -ftree-vectorize -ftree-vectorizer-verbose=1
-diff --git a/src/peigs/DEFS b/src/peigs/DEFS
-index 53534a4..b2e0ff3 100644
---- a/src/peigs/DEFS
-+++ b/src/peigs/DEFS
-@@ -68,7 +68,7 @@ peigs_FC = $(FC) $(FOPTIONS) $(FOPTIMIZE) -I$(peigs_HDIR)
+Index: nwchem/src/peigs/DEFS
+===================================================================
+--- nwchem.orig/src/peigs/DEFS
++++ nwchem/src/peigs/DEFS
+@@ -68,7 +68,7 @@ peigs_FC = $(NWFC) $(FOPTIONS) $(FOPTIMI
  # this is needed because -DCRAY-T3E cannot be a macro definition it should be -DCRAY_T3E
  #
  peigs_TARGET_definition = $(peigs_TARGET)
--peigs_CC = $(CC) $(COPTIONS) -I$(peigs_HDIR) -D$(peigs_TARGET_definition) -D$(peigs_CPU)
-+peigs_CC = $(CC) $(COPTIONS) -I$(peigs_HDIR) -D$(peigs_TARGET_definition)
+-peigs_CC = $(NWCC) $(COPTIONS) -I$(peigs_HDIR) -D$(peigs_TARGET_definition) -D$(peigs_CPU)
++peigs_CC = $(NWCC) $(COPTIONS) -I$(peigs_HDIR) -D$(peigs_TARGET_definition)
  peigs_LINK = $(FC) $(FOPTIONS) -I$(peigs_HDIR)
  peigs_COMM = TCGMSG
  peigs_CPP  = $(CPP) -I$(peigs_HDIR) -D$(peigs_CPU) -D$(peigs_COMM) -D$(peigs_TARGET_definition) -P
@@ -122,7 +122,7 @@ index 53534a4..b2e0ff3 100644
  ifeq ($(_CPU),alpha)
  	peigs_CPU  = ALPHA
  ifeq ($(CC),gcc)
-@@ -620,7 +620,7 @@ ifeq ($(peigs_TARGET),$(findstring $(peigs_TARGET),LINUX INTERIX CYGWIN CYGNUS))
+@@ -620,7 +620,7 @@ ifeq ($(peigs_TARGET),$(findstring $(pei
  #
  peigs_COMM = TCGMSG
  peigs_CODEOBJ = DBLE

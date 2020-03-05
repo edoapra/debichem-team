@@ -1,8 +1,8 @@
-Index: nwchem-6.8/QA/runtests.mpi.unix
+Index: nwchem/QA/runtests.mpi.unix
 ===================================================================
---- nwchem-6.8.orig/QA/runtests.mpi.unix
-+++ nwchem-6.8/QA/runtests.mpi.unix
-@@ -385,7 +385,7 @@ sync
+--- nwchem.orig/QA/runtests.mpi.unix
++++ nwchem/QA/runtests.mpi.unix
+@@ -393,7 +393,7 @@ sync
        continue
      endif
  

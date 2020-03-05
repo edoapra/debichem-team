@@ -1,12 +1,10 @@
-Index: nwchem-6.8/QA/runtests.mpi.unix
-===================================================================
---- nwchem-6.8.orig/QA/runtests.mpi.unix
-+++ nwchem-6.8/QA/runtests.mpi.unix
-@@ -233,6 +233,7 @@ foreach TEST_in ($args_2_use)
-   if (! -f $TESTDIR/$INPUTFILE) then
-     echo failed: cannot access $TESTDIR/$INPUTFILE
+--- ./QA/runtests.mpi.unix.orig	2019-01-21 23:01:14.267470205 +0100
++++ ./QA/runtests.mpi.unix	2019-01-21 23:01:46.859903957 +0100
+@@ -402,6 +402,7 @@
+   if ($diff1status) then
+     echo "failed"
      set overall_status = 1
 +    tail -50 $TESTOUTPUTS/$OUTPUTFILE
-     continue
-   endif
-  set INPUTFILE=$NWCHEM_TOP/QA/$TESTDIR/$INPUTFILE 
+     continue 
+   else
+ #

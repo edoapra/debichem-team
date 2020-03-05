@@ -4,14 +4,13 @@ Priority: optional
 Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
 Uploaders: Michael Banck <mbanck@debian.org>
 Build-Depends: autotools-dev (>> 20100122.1~),
-               csh,
                debhelper (>= 7.0.50~),
                gfortran,
+               libarmci-mpi-dev,
                libblas-dev,
+               libglobalarrays-dev (>= 5.7-4),
                liblapack-dev,
-               libscalapack-mpi-dev (>= 1),
-	       libblacs-openmpi1,
-               libopenblas-dev,
+               libscalapack-mpi-dev (>= 2),
                mpi-default-bin,
                mpi-default-dev,
                openssh-client,

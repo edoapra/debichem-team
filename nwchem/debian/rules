@@ -13,43 +13,30 @@ endif
 
 include /usr/share/mpi-default-dev/debian_defaults
 
+export USE_64TO32="yes"
 ifeq ($(DEB_HOST_ARCH_BITS),64)
 export NWCHEM_TARGET=LINUX64
-export USE_SCALAPACK_I8="yes"
-export BLAS_SIZE=4
-export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL) -lblacs-$(ARCH_DEFAULT_MPI_IMPL)
-export BLASOPT=-lopenblas
-export LAPACK_LIB=-lopenblas
-export USE_64TO32="yes"
 else
 export NWCHEM_TARGET=LINUX
-export BLASOPT="-lblas"
+endif
+export BLAS_SIZE=4
+export BLAS_LIB="-lblas"
 export LAPACK_LIB="-llapack"
 export USE_SCALAPACK="yes"
+export SCALAPACK_SIZE=4
 export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)
-endif
 ifeq ($(DEB_HOST_ARCH),armhf)
 export GCC49_ARM_BROKEN="yes"
 endif
 export NWCHEM_TOP=${CURDIR}
-export NWCHEM_MODULES="pnnl"
+export NWCHEM_MODULES=all python
 export NWCHEM_LONG_PATHS="y"
-export PYTHONVERSION=$(shell pyversions -dv)
-export PYTHONHOME=$(shell python-config --prefix)
-export USE_PYTHONCONFIG="y"
+export EXTERNAL_GA_PATH=/usr
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
-export FC=gfortran
 export USE_MPI="y"
 export USE_MPIF="y"
 export USE_MPIF4="y"
-ifeq ($(ARCH_DEFAULT_MPI_IMPL),mpich)
-#export LIBMPI=-lmpi -lmpif77
-else
-#export LIBMPI=$(shell pkg-config mpi-fort --libs)
-endif
-#export MPI_LIB=/usr/lib
-#export MPI_INCLUDE=/usr/include/${DEB_HOST_MULTIARCH}/mpi
 ifneq (,$(filter ccsdtq,$(DEB_BUILD_OPTIONS)))
 export CCSDTQ="yes"
 endif
@@ -59,28 +46,23 @@ endif
 export MRCC_METHODS=y
 export IPCCSD=y
 export EACCSD=y
-#export BLACS=$(SCALAPACK)
-export ARMCI_NETWORK=MPI-TS
-export GA_COPT=-g -O2
-export ARMCI_COPT=-g -O2
+export BLASOPT=-lblas -llapack
+export ARMCI_NETWORK=SOCKETS
 
 %:
-	dh $@ --with autotools_dev,python2 --parallel
+	dh $@ --with autotools_dev,python3 --parallel
 
 override_dh_auto_build-arch:
 	mkdir -p $(CURDIR)/bin/${NWCHEM_TARGET}
-	(cd $(CURDIR)/src && NWCHEM_TOP=$(CURDIR) make nwchem_config)
-ifeq ($(DEB_HOST_ARCH_BITS),64)
+	(cd $(CURDIR)/src && make nwchem_config)
 	(cd $(CURDIR)/src && make 64_to_32)
+ifeq ($(DEB_HOST_ARCH_BITS),64)
 	find src -name include_stamp | xargs rm -f
 	find src -name dependencies | xargs rm -f
 endif
-	(cd $(CURDIR)/src && make -j2)
+	(cd $(CURDIR)/src && make)
 	(cd $(CURDIR)/src/util && make)
 	(cd $(CURDIR)/src && make link)
-ifeq ($(DEB_HOST_ARCH_BITS),64)
-	(cd $(CURDIR)/src && make 32_to_64)
-endif
 
 override_dh_auto_clean:
 	dh_testdir
@@ -88,7 +70,7 @@ override_dh_auto_clean:
 	-(cd $(CURDIR)/doc && make realclean)
 	rm -rf $(CURDIR)/bin $(CURDIR)/lib $(CURDIR)/src/tools/lib 
 	rm -rf $(CURDIR)/QA/scratchdir $(CURDIR)/QA/testoutputs
-	rm -f src/util/util_version.F src/stubs.F src/util/util_module_avail.F
+	rm -f src/util/util_version.F src/stubs.F src/util/util_module_avail.F src/util/util_nwchem_version.F
 	find $(CURDIR) -name "*.stamp" | xargs rm -f
 	dh_auto_clean
 	rm -f src/config/NWCHEM_CONFIG src/config/nwchem_config.h

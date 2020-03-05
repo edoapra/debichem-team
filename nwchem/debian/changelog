@@ -1,8 +1,70 @@
+nwchem (7.0.0-1) unstable; urgency=medium
+
+  * 7.0.0 release
+
+ -- Edoardo Apra' <edoardo.apra@gmail.com>  Thu, 05 Mar 2020 1:10:00 +0000
+
+nwchem (6.8.1-5) unstable; urgency=medium
+
+  * Team upload
+  * Fix clean target
+    Closes: #924817
+
+ -- Andreas Tille <tille@debian.org>  Mon, 25 Mar 2019 09:52:20 +0100
+
+nwchem (6.8.1-4) unstable; urgency=medium
+
+  * debian/patches/15_testsuite_print_output_on_failure.patch: Fixed patch. 
+  * debian/testsuite: Added rt_tddft_dimer_charge testcase. 
+
+ -- Michael Banck <mbanck@debian.org>  Mon, 21 Jan 2019 23:29:56 +0100
+
+nwchem (6.8.1-3) unstable; urgency=medium
+
+  * debian/rules (GA_COPT, ARMCI_COPT): Removed, no longer needed.
+  * debian/testsuite: Add -e flag to csh shebang, so that it exits on failure
+    and rearrange tests so that they are all run in one command.
+  * debian/control (Build-Depends): Bump libglobalarrays-dev version
+    requirement to 5.7-4.
+  * debian/tests: Add autopkgtests.
+  * debian/testsuite: Comment out numerically unstable or currently failing
+    tests.
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 20 Jan 2019 20:58:56 +0100
+
+nwchem (6.8.1-2) unstable; urgency=medium
+
+  * debian/rules (BLAS_SIZE): Set to 4 on all architectures. Closes: #918003.
+  * debian/rules (USE_SCALAPACK_I8): Removed.
+
+ -- Michael Banck <mbanck@debian.org>  Wed, 02 Jan 2019 15:54:31 +0100
+
+nwchem (6.8.1-1) unstable; urgency=medium
+
+  * New upstream point release.
+  * debian/patches/03_hurd-i386_define_path_max.patch: Removed global arrays
+    patch, no longer neded.
+  * debian/patches/06_statfs_kfreebsd.patch: Likewise.
+  * debian/patches/07_ga_target_force_linux.patch: Likewise.
+  * debian/patches/11_fix_armci_locks.patch: Likewise.
+  * debian/patches/12_pythonlib_multiarch_path.patch: Removed, applied
+    upstream.
+  * debian/patches/20_glibc-2.28_fix.patch: Likewise.
+  * debian/patches/02_makefile_flags.patch: Updated.
+  * debian/patches/04_show_testsuite_diff_output.patch: Refreshed.
+  * debian/control (Build-Depends): Added libarmci-mpi-dev and
+    libglobalarrays-dev.
+  * debian/watch: Updated.
+  * debian/rules (EXTERNAL_GA_PATH): New variable, using the system
+    libglobalarrays-dev library.
+
+ -- Michael Banck <mbanck@debian.org>  Tue, 01 Jan 2019 23:36:31 +0100
+
 nwchem (6.8.1+133+gitge032219-2) unstable; urgency=medium
 
-  * ARMCI_NETWORK=MPIT-TS
+  * ARMCI_NETWORK=MPI-TS
 
- -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 AUg 2018 10:10:00 +0000
+ -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 Aug 2018 10:10:00 +0000
 
 nwchem (6.8.1+133+gitge032219-1) unstable; urgency=medium
 
