@@ -1,9 +1,20 @@
-nwchem (7.0.0-1) unstable; urgency=medium
+nwchem (7.0.0-1) UNRELEASED; urgency=medium
 
-  * New 7.0.0 release
-  * debian/patches/17_pspw_scalapack.patch: Fix when peigs is not available and scalapack is 
+  [ Debichem Team ]
+  * New upstream release.
 
- -- Edoardo Apra' <edoardo.apra@gmail.com>  Thu, 05 Mar 2020 1:10:00 +0000
+  [ Michael Banck ]
+  * debian/patches/04_show_testsuite_diff_output.patch: Removed, no longer
+    needed.
+  * debian/patches/02_makefile_flags.patch: Refreshed.
+  * debian/patches/15_testsuite_print_output_on_failure.patch: Likewise.
+  * debian/watch: Updated for new tag naming scheme.
+  * debian/patches/17_pspw_scalapack.patch: Fix for nwpw when peigs is not available and scalapack is
+  * debian/patches/17_mcscf_scalapack.patch: Fix for mcscf when peigs is not available and scalapack is
+  * debian/testsuite: Disabled test cases pspw_stress and dft_he2+ as they are
+    numerically unstable without PEIGS.
+
+ -- Debichem Team <debichem-devel@lists.alioth.debian.org>  Sun, 01 Mar 2020 18:36:20 +0100
 
 nwchem (6.8.1-5) unstable; urgency=medium
 
@@ -61,18 +72,12 @@ nwchem (6.8.1-1) unstable; urgency=medium
 
  -- Michael Banck <mbanck@debian.org>  Tue, 01 Jan 2019 23:36:31 +0100
 
-nwchem (6.8.1+133+gitge032219-2) unstable; urgency=medium
+nwchem (6.8+47+gitdf6c956-4) unstable; urgency=medium
 
-  * ARMCI_NETWORK=MPI-TS
+  * debian/patches/20_glibc-2.28_fix.patch: New patch, replaces loff_t with
+    off_t, taken from upstream commit 6f6865a8. Closes: #916048.
 
- -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 Aug 2018 10:10:00 +0000
-
-nwchem (6.8.1+133+gitge032219-1) unstable; urgency=medium
-
-  * 6.8.1 release
-  * openblas for BLAS and LAPACK
-
- -- Edoardo Apra' <edoardo.apra@gmail.com>  Tue, 14 AUg 2018 10:10:00 +0000
+ -- Michael Banck <mbanck@debian.org>  Wed, 12 Dec 2018 14:29:18 +0100
 
 nwchem (6.8+47+gitdf6c956-3) unstable; urgency=medium
 
