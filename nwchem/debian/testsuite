@@ -1,9 +1,9 @@
-#!/bin/csh -e -f
+#!/bin/bash
 #
 # $Id: doqmtests,v 1.63 2008-12-07 19:26:52 jhammond Exp $
 #
-set np = 1
-if ($1 == "all") then
+let np=1
+if [[ "$1" == "all" ]]; then
 $RUNTESTS procs $np 5h2o_core
 $RUNTESTS procs $np acr-camb3lyp-cdfit
 $RUNTESTS procs $np acr-camb3lyp-direct
@@ -200,7 +200,7 @@ $RUNTESTS procs $np pspw_polarizability
 $RUNTESTS procs $np pspw_SiC
 $RUNTESTS procs $np pspw_stress
 $RUNTESTS procs $np ptatom
-$RUNTESTS procs $np pyqa
+$RUNTESTS procs $np pyqa3
 $RUNTESTS procs $np qmmm_freq
 $RUNTESTS procs $np qmmm_grad0
 $RUNTESTS procs $np qmmm_opt0
@@ -253,7 +253,7 @@ $RUNTESTS procs $np 						\
 	auh2o autosym dft_he2+ h2mp2 h2o hess_h2o prop_h2o	\
 	geom_zmatrix rimp2_ne small_intchk tagcheck testtab	\
 	h2o_dk cosmo_h2o ch5n_nbo h2s_finite			\
-	pyqa startag esp esp_uhf dft_bsse			\
+	pyqa3 startag esp esp_uhf dft_bsse			\
 	dplot_dft dft_meta dft_mpwb1khf prop_uhf_h2o		\
 	et_zn_dimer vectors_rotate sad_ch3hf			\
 	band pspw pspw_md pspw_stress				\
@@ -269,4 +269,4 @@ $RUNTESTS procs $np 						\
 # tce_cr_eom_t_ch_rohf tce_mrcc_bwcc
 # tce_cc2_c2
 # qmmm_grad0
-endif
+fi
