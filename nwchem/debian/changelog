@@ -1,6 +1,7 @@
 nwchem (7.0.0-1) unstable; urgency=medium
 
-  * 7.0.0 release
+  * New 7.0.0 release
+  * debian/patches/17_pspw_scalapack.patch: Fix when peigs is not available and scalapack is 
 
  -- Edoardo Apra' <edoardo.apra@gmail.com>  Thu, 05 Mar 2020 1:10:00 +0000
 
