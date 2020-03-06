@@ -3,3 +3,4 @@
 08_lapack_constants_headers.patch
 13_armhf_noopt.patch
 17_pspw_scalapack.patch
+18_mcscf_scalapack.patch
