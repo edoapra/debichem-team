@@ -13,16 +13,15 @@ endif
 
 include /usr/share/mpi-default-dev/debian_defaults
 
-export USE_64TO32="yes"
 ifeq ($(DEB_HOST_ARCH_BITS),64)
 export NWCHEM_TARGET=LINUX64
+export USE_64TO32="yes"
 else
 export NWCHEM_TARGET=LINUX
 endif
 export BLAS_SIZE=4
-export BLAS_LIB="-lblas"
-export LAPACK_LIB="-llapack"
-export USE_SCALAPACK="yes"
+export BLAS_LIB="-lopenblas"
+export LAPACK_LIB="-lopenblas"
 export SCALAPACK_SIZE=4
 export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)
 ifeq ($(DEB_HOST_ARCH),armhf)
@@ -34,6 +33,7 @@ export NWCHEM_LONG_PATHS="y"
 export EXTERNAL_GA_PATH=/usr
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
+export FC=gfortran
 export USE_MPI="y"
 export USE_MPIF="y"
 export USE_MPIF4="y"
@@ -46,17 +46,16 @@ endif
 export MRCC_METHODS=y
 export IPCCSD=y
 export EACCSD=y
-export BLASOPT=-lblas -llapack
-export ARMCI_NETWORK=SOCKETS
+export MAKEFLAGS=-j 3 --no-print-directory
 
 %:
 	dh $@ --with autotools_dev,python3 --parallel
 
 override_dh_auto_build-arch:
 	mkdir -p $(CURDIR)/bin/${NWCHEM_TARGET}
-	(cd $(CURDIR)/src && make nwchem_config)
-	(cd $(CURDIR)/src && make 64_to_32)
+	(cd $(CURDIR)/src && NWCHEM_TOP=$(CURDIR) make nwchem_config)
 ifeq ($(DEB_HOST_ARCH_BITS),64)
+	(cd $(CURDIR)/src && make 64_to_32)
 	find src -name include_stamp | xargs rm -f
 	find src -name dependencies | xargs rm -f
 endif

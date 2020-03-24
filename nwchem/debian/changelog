@@ -1,20 +1,42 @@
-nwchem (7.0.0-1) UNRELEASED; urgency=medium
+nwchem (7.0.0-3) UNRELEASED; urgency=medium
 
-  [ Debichem Team ]
+
+ -- Debichem Team <debichem-devel@lists.alioth.debian.org>  Sun, 08 Mar 2020 20:46:11 +0100
+
+nwchem (7.0.0-2) unstable; urgency=medium
+
+  * debian/patches/17_pspw_scalapack.patch: New patch, fixes PSPW with
+    ScaLAPACK, by Edoardo Apra.
+  * debian/patches/18_mcscf_scalapack.patch: New patch, fixes MCSCF with
+    ScaLAPACK, by Edoardo Apra.
+  * debian/rules (SCALAPACK_SIZE): New variable.
+  * debian/control (Build-Depends): Bump required libarmci-mpi-dev version to
+    0.3.1~beta.
+  * debian/control (Build-Depends): Replaced python-dev with python3-dev
+    (Closes: #937171).
+  * debian/rules: Switch to python3 dh module.
+  * debian/control (Build-Depends): Added dh-python.
+  * debian/testsuite: Run pyqa3 test instead of pyqa, by Edoardo Apra.
+  * debian/testsuite: Reactive test cases cosmo_h3co, dft_he2+ and qmmm_grad0.
+  * debian/control (Build-Depends): Bump required libglobalarrays-dev version
+    to 5.7.2-2.
+  * debian/patches/16_disable_peigs.patch: Removed, no longer needed.
+
+ -- Michael Banck <mbanck@debian.org>  Sun, 08 Mar 2020 20:45:32 +0100
+
+nwchem (7.0.0-1) unstable; urgency=medium
+
   * New upstream release.
-
-  [ Michael Banck ]
   * debian/patches/04_show_testsuite_diff_output.patch: Removed, no longer
     needed.
   * debian/patches/02_makefile_flags.patch: Refreshed.
   * debian/patches/15_testsuite_print_output_on_failure.patch: Likewise.
   * debian/watch: Updated for new tag naming scheme.
-  * debian/patches/17_pspw_scalapack.patch: Fix for nwpw when peigs is not available and scalapack is
-  * debian/patches/17_mcscf_scalapack.patch: Fix for mcscf when peigs is not available and scalapack is
+  * debian/patches/16_disable_peigs.patch: New patch, disable PEIGS.
   * debian/testsuite: Disabled test cases pspw_stress and dft_he2+ as they are
     numerically unstable without PEIGS.
 
- -- Debichem Team <debichem-devel@lists.alioth.debian.org>  Sun, 01 Mar 2020 18:36:20 +0100
+ -- Michael Banck <mbanck@debian.org>  Wed, 04 Mar 2020 13:25:09 +0100
 
 nwchem (6.8.1-5) unstable; urgency=medium
 

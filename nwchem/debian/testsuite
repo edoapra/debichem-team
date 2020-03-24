@@ -250,7 +250,8 @@ $RUNTESTS procs $np water/water_pme
 $RUNTESTS procs $np xe_zora_sf
 else
 $RUNTESTS procs $np 						\
-	auh2o autosym dft_he2+ h2mp2 h2o hess_h2o prop_h2o	\
+	cosmo_h3co dft_he2+ qmmm_grad0				\
+	auh2o autosym h2mp2 h2o hess_h2o prop_h2o		\
 	geom_zmatrix rimp2_ne small_intchk tagcheck testtab	\
 	h2o_dk cosmo_h2o ch5n_nbo h2s_finite			\
 	pyqa3 startag esp esp_uhf dft_bsse			\
@@ -264,7 +265,6 @@ $RUNTESTS procs $np 						\
 	tddftgrad_n2_uks tddftgrad_ch2o				\
 	water/water_md water/water_pme
 # Currently numerical unstable or failing due to other reasons:
-# cosmo_h3co
 # h2o_selci
 # tce_cr_eom_t_ch_rohf tce_mrcc_bwcc
 # tce_cc2_c2

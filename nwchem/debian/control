@@ -5,17 +5,17 @@ Maintainer: Debichem Team <debichem-devel@lists.alioth.debian.org>
 Uploaders: Michael Banck <mbanck@debian.org>
 Build-Depends: autotools-dev (>> 20100122.1~),
                debhelper (>= 7.0.50~),
+               dh-python,
                gfortran,
-               libarmci-mpi-dev,
                libblas-dev,
-               libglobalarrays-dev (>= 5.7-4),
+               libglobalarrays-dev (>= 5.7.2-2),
                liblapack-dev,
                libscalapack-mpi-dev (>= 2),
                mpi-default-bin,
                mpi-default-dev,
                openssh-client,
                pkg-config,
-               python-dev (>= 2.6.6-3~),
+               python3-dev,
                zlib1g-dev
 Standards-Version: 3.9.5
 X-Python-Version: current
