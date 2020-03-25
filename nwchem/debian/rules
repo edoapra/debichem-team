@@ -23,14 +23,13 @@ export BLAS_SIZE=4
 export BLAS_LIB="-lopenblas"
 export LAPACK_LIB="-lopenblas"
 export SCALAPACK_SIZE=4
-export SCALAPACK=-lscalapack-$(ARCH_DEFAULT_MPI_IMPL)
+export BUILD_SCALAPACK=1
 ifeq ($(DEB_HOST_ARCH),armhf)
 export GCC49_ARM_BROKEN="yes"
 endif
 export NWCHEM_TOP=${CURDIR}
 export NWCHEM_MODULES=all python
 export NWCHEM_LONG_PATHS="y"
-export EXTERNAL_GA_PATH=/usr
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
 export FC=gfortran
@@ -49,7 +48,7 @@ export EACCSD=y
 export MAKEFLAGS=-j 3 --no-print-directory
 
 %:
-	dh $@ --with autotools_dev,python3 --parallel
+	dh $@  --parallel
 
 override_dh_auto_build-arch:
 	mkdir -p $(CURDIR)/bin/${NWCHEM_TARGET}
