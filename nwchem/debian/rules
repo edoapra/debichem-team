@@ -29,7 +29,7 @@ export GCC49_ARM_BROKEN="yes"
 endif
 export NWCHEM_TOP=${CURDIR}
 export NWCHEM_MODULES=all python
-export NWCHEM_LONG_PATHS="y"
+export NWCHEM_LONG_PATHS="Y"
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
 export FC=gfortran
