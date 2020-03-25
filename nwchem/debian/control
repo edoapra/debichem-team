@@ -7,16 +7,14 @@ Build-Depends: autotools-dev (>> 20100122.1~),
                debhelper (>= 7.0.50~),
                dh-python,
                gfortran,
-               libblas-dev,
                libglobalarrays-dev (>= 5.7.2-2),
-               liblapack-dev,
                libscalapack-mpi-dev (>= 2),
+               libopenblas-dev,
                mpi-default-bin,
                mpi-default-dev,
                openssh-client,
                pkg-config,
-               python3-dev,
-               zlib1g-dev
+               python3.8-dev
 Standards-Version: 3.9.5
 X-Python-Version: current
 Homepage: http://www.nwchem-sw.org

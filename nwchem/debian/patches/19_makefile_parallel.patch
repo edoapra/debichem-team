@@ -1,0 +1,11 @@
+--- nwchem/src/config/makefile.h.orig	2020-03-24 12:52:58.924496588 -0700
++++ nwchem/src/config/makefile.h	2020-03-24 12:53:33.420610268 -0700
+@@ -1838,7 +1838,7 @@
+         endif
+       endif
+       DEFINES  += -DEXT_INT
+-#      MAKEFLAGS = -j 1 --no-print-directory
++      MAKEFLAGS = -j 3 --no-print-directory
+      ifeq ($(BLAS_LIB),)
+        CORE_SUBDIRS_EXTRA += blas
+      endif

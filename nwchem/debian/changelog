@@ -1,5 +1,13 @@
 nwchem (7.0.0-3) UNRELEASED; urgency=medium
 
+  * debian/patches/19_makefile_parallel.patch: New patch, enables
+    paralle make, by Edoardo Apra.
+  * debian/patches/20_gnum.patch: New patch, fixes detection of
+    gnu compilers, by Edoardo Apra.
+  * debian/patches/21_solvation_ppc64le.patch: New patch, fixes QA test
+    results on pcc64le, by Edoardo Apra.
+  * debian/control : use openblas to improve perfomance
+  * debian/rules : use python3.8dev to fix pspw_stress test
 
  -- Debichem Team <debichem-devel@lists.alioth.debian.org>  Sun, 08 Mar 2020 20:46:11 +0100
 
