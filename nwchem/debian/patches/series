@@ -6,3 +6,4 @@
 17_pspw_scalapack.patch
 18_mcscf_scalapack.patch
 19_makefile_parallel.patch
+22_longpath.patch
