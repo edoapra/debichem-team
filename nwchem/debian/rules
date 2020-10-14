@@ -15,15 +15,13 @@ include /usr/share/mpi-default-dev/debian_defaults
 
 ifeq ($(DEB_HOST_ARCH_BITS),64)
 export NWCHEM_TARGET=LINUX64
-export USE_64TO32="yes"
 else
 export NWCHEM_TARGET=LINUX
 endif
-export BLAS_SIZE=4
-export BLAS_LIB="-lopenblas"
-export LAPACK_LIB="-lopenblas"
-export SCALAPACK_SIZE=4
+export BUILD_OPENBLAS=1
 export BUILD_SCALAPACK=1
+export BLAS_SIZE=8
+export SCALAPACK_SIZE=8
 ifeq ($(DEB_HOST_ARCH),armhf)
 export GCC49_ARM_BROKEN="yes"
 endif
@@ -54,7 +52,6 @@ override_dh_auto_build-arch:
 	mkdir -p $(CURDIR)/bin/${NWCHEM_TARGET}
 	(cd $(CURDIR)/src && NWCHEM_TOP=$(CURDIR) make nwchem_config)
 ifeq ($(DEB_HOST_ARCH_BITS),64)
-	(cd $(CURDIR)/src && make 64_to_32)
 	find src -name include_stamp | xargs rm -f
 	find src -name dependencies | xargs rm -f
 endif

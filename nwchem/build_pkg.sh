@@ -1,4 +1,4 @@
-#!/bin/bash -f
+#!/bin/bash 
 rm -f v*.tar.*
 rm -rf nwchem*
 uscan --download --download-current-version --verbose --destdir=. --force-download

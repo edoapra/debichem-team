@@ -2,8 +2,3 @@
 02_makefile_flags.patch
 08_lapack_constants_headers.patch
 13_armhf_noopt.patch
-15_testsuite_print_output_on_failure.patch
-17_pspw_scalapack.patch
-18_mcscf_scalapack.patch
-19_makefile_parallel.patch
-22_longpath.patch
