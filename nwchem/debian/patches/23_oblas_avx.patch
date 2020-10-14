@@ -1,0 +1,11 @@
+--- nwchem/src/libext/openblas/build_openblas.sh.org	2020-10-14 16:30:45.000000000 -0700
++++ nwchem/src/libext/openblas/build_openblas.sh	2020-10-14 16:33:19.000000000 -0700
+@@ -37,6 +37,7 @@
+ else
+   binary=64
+ fi
++    FORCETARGET=" TARGET=SANDYBRIDGE "
+ if [[ -n ${FC} ]] &&  [[ ${FC} == xlf ]] || [[ ${FC} == xlf_r ]] || [[ ${FC} == xlf90 ]]|| [[ ${FC} == xlf90_r ]]; then
+  make CC=gcc FC="xlf -qextname"  INTERFACE64="$sixty4_int" BINARY="$binary" USE_THREAD=0 NO_CBLAS=1 NO_LAPACKE=1 DEBUG=0 NUM_THREADS=1 LAPACK_FPFLAGS="-qstrict=ieeefp -O2 -g" libs netlib
+ elif  [[ -n ${FC} ]] && [[ "${FC}" == "flang" ]]; then
+

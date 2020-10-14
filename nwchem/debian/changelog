@@ -5,11 +5,12 @@ nwchem (7.0.2-1) UNRELEASED; urgency=medium
   * BUILD_OPENBLAS=1 BUILD_SCALAPACK=1 BLAS_SIZE=8 SCALAPACK_SIZE=8
   * no need of 64_to_32
   * removed patches that got into 7.0.2
-  * 15_testsuite_print_output_on_failure.patch: Removed, no longer needed.
-  * 17_pspw_scalapack.patch: Removed, no longer needed.
-  * 18_mcscf_scalapack.patch: Removed, no longer needed.
-  * 19_makefile_parallel.patch: Removed, no longer needed.
-  * 22_longpath.patch: Removed, no longer needed.
+  * debian/patches/15_testsuite_print_output_on_failure.patch: Removed, no longer needed.
+  * debian/patches/17_pspw_scalapack.patch: Removed, no longer needed.
+  * debian/patches/18_mcscf_scalapack.patch: Removed, no longer needed.
+  * debian/patches/19_makefile_parallel.patch: Removed, no longer needed.
+  * debian/patches/22_longpath.patch: Removed, no longer needed.
+  * debian/patches/23_oblas_avx.patch: New patch, build OpenBLAS with AVX instructions
 
 nwchem (7.0.0-3) UNRELEASED; urgency=medium
 
