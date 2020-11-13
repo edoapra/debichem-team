@@ -17,7 +17,7 @@ Build-Depends: autotools-dev (>> 20100122.1~),
                python3.8-dev
 Standards-Version: 3.9.5
 X-Python-Version: current
-Homepage: http://www.nwchem-sw.org
+Homepage: https://nwchemgit.github.io/
 Vcs-Browser: https://salsa.debian.org/debichem-team/nwchem
 Vcs-Git: https://salsa.debian.org/debichem-team/nwchem.git
 
