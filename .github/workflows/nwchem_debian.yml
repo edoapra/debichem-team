@@ -1,0 +1,45 @@
+name: nwchem_debian_packagin
+
+on:
+  release:
+  schedule:
+    - cron: '0 2 * * *'
+  repository_dispatch:
+    types: [backend_automation]
+  workflow_dispatch:
+
+jobs:
+  docker_build:
+ 
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
+      - name: Setup cache
+        id: setup-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/cache
+          key: nwchem-debian-v001
+      - name: delete artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: nwchempkg
+          failOnError: false 
+      - name: install required packages
+        run: |
+          cd nwchem
+          ./req.sh
+      - name: build  packages
+        run: |
+          cd nwchem
+          ./build_pkg.sh
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: nwchempkg
+          path: nwchem-ubuntu.pkg
+          retention-days: 1
