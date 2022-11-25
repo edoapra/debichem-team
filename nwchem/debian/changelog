@@ -1,3 +1,9 @@
+nwchem (7.2.0) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Edoardo Apra <edoardo.apra@pnnl.gov>  Thu, 24 Nov 2022 11:25:09 +0100
+
 nwchem (7.0.2-1) UNRELEASED; urgency=medium
 
   * New upstream release.
@@ -11,6 +17,8 @@ nwchem (7.0.2-1) UNRELEASED; urgency=medium
   * debian/patches/19_makefile_parallel.patch: Removed, no longer needed.
   * debian/patches/22_longpath.patch: Removed, no longer needed.
   * debian/patches/23_oblas_avx.patch: New patch, build OpenBLAS with AVX instructions
+
+ -- Michael Banck <mbanck@debian.org>  Wed, 04 Mar 2020 13:25:09 +0100
 
 nwchem (7.0.0-3) UNRELEASED; urgency=medium
 

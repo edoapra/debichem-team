@@ -40,6 +40,7 @@ endif
 ifneq (,$(filter ccsdtlr,$(DEB_BUILD_OPTIONS)))
 export CCSDTLR="yes"
 endif
+export USE_HWOPT=n
 export MRCC_METHODS=y
 export IPCCSD=y
 export EACCSD=y

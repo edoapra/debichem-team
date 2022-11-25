@@ -1,5 +1,0 @@
-01_hardcode_basis-sets_location.patch
-02_makefile_flags.patch
-08_lapack_constants_headers.patch
-13_armhf_noopt.patch
-23_oblas_avx.patch
