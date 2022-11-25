@@ -1,3 +1,4 @@
 src/basis/libraries	usr/share/nwchem
+src/basis/libraries.bse	usr/share/nwchem
 src/data/*		usr/share/nwchem
 src/nwpw/libraryps	usr/share/nwchem
