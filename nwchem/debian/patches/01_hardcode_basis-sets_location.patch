@@ -2,21 +2,24 @@ Index: nwchem-6.8/src/basis/bas_input.F
 ===================================================================
 --- nwchem-6.8.orig/src/basis/bas_input.F
 +++ nwchem-6.8/src/basis/bas_input.F
-@@ -1253,12 +1253,11 @@ c
+@@ -1295,13 +1295,14 @@ c
        noslash=.false.
        calls = calls + 1
        if (debug) write(luout,*)' calls:calls: ',calls
 -      call util_nwchem_srcdir(compiled_name)
-+c     call util_nwchem_srcdir(compiled_name)
++c      call util_nwchem_srcdir(compiled_name)
  c
  c     add here basis/libraries bit
  c
+       if(libname.ne.' ') then
 -      compiled_name=compiled_name(1:inp_strlen(compiled_name))
--     $     //"/basis/libraries/"
+-     $     //"/basis/"//libname(1:inp_strlen(libname))//"/"
++c      compiled_name=compiled_name(1:inp_strlen(compiled_name))
++c     $     //"/basis/"//libname(1:inp_strlen(libname))//"/"
 +      compiled_name="/usr/share/nwchem/libraries/"
- *
- * order of precedence for choosing name
- * 1) value of NWCHEM_BASIS_LIBRARY environment variable
+       else
+       compiled_name=compiled_name(1:inp_strlen(compiled_name))
+      $     //"/basis/libraries/"
 Index: nwchem-6.8/src/nwpw/libraryps/nwpw_libfile.F
 ===================================================================
 --- nwchem-6.8.orig/src/nwpw/libraryps/nwpw_libfile.F
