@@ -1,4 +1,4 @@
-name: nwchem_debian_packagin
+name: nwchem_debian_packaging
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker_build:
+  build:
  
     runs-on: ubuntu-22.04
     steps:
