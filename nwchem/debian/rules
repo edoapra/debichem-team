@@ -75,7 +75,8 @@ override_dh_auto_clean:
 	dh_auto_clean
 	rm -f src/config/NWCHEM_CONFIG src/config/nwchem_config.h
 
-export RUNTESTS=$(CURDIR)/QA/runtests.mpi.unix 
+export RUNTESTS=$(CURDIR)/QA/runtests.mpi.unix
+export MPIRUN_PATH="timeout -v --preserve-status 5m mpirun"
 export NWCHEM_EXECUTABLE=${NWCHEM_TOP}/bin/${NWCHEM_TARGET}/nwchem
 export NWCHEM_BASIS_LIBRARY=${NWCHEM_TOP}/src/basis/libraries/
 export NWCHEM_NWPW_LIBRARY=${NWCHEM_TOP}/src/nwpw/libraryps/
