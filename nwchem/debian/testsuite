@@ -222,13 +222,9 @@ $RUNTESTS procs $np tce_eomsd_eomsol2
 $RUNTESTS procs $np tce_h2o
 $RUNTESTS procs $np tce_h2o_dipole
 $RUNTESTS procs $np tce_h2o_eomcc
-$RUNTESTS procs $np tce_hyperpolar_ccsd_big
-$RUNTESTS procs $np tce_hyperpolar_ccsd_small
 $RUNTESTS procs $np tce_lr_ccsd_t
 $RUNTESTS procs $np tce_lr_ccsd_tq
 $RUNTESTS procs $np tce_ozone_2eorb
-$RUNTESTS procs $np tce_polar_ccsd_big
-$RUNTESTS procs $np tce_polar_ccsd_small
 $RUNTESTS procs $np tce_uhf_uccsd
 $RUNTESTS procs $np tce_uracil_creomact
 $RUNTESTS procs $np tddft_ac_co
@@ -261,7 +257,7 @@ $RUNTESTS procs $np 						\
 	mcscf_ch2 dft_li2freq n2_ccsd tce_ccsd_t_h2o		\
 	tddft_h2o rt_tddft_dimer_charge				\
 	tce_eaccsd_ozone tce_ipccsd_f2				\
-	tce_hyperpolar_ccsd_small mp2_scs_n2			\
+	mp2_scs_n2			\
 	tddftgrad_n2_uks tddftgrad_ch2o				\
 	water/water_md water/water_pme
 # Currently numerical unstable or failing due to other reasons:
