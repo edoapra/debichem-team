@@ -54,6 +54,11 @@ jobs:
           find . -name "*deb" ||  true
           mkdir  -p ${{ env.art_dir }}
           cp `find nwchem -name "*deb" ` ${{ env.art_dir }}/.
+      - name: rename packages
+        run: |
+          cd ${{ env.art_dir }}
+          for f in *deb; do mv $f $(echo $f|sed s/.deb/${{env.image_name}}.deb/) ; done
+          ls -lrat
       - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
