@@ -12,11 +12,11 @@ jobs:
   build:
     strategy:
       fail-fast: false
-        matrix:
-          images:
-            - ubuntu:xenial
-            - ubuntu:bionic
-            - ubuntu:focal
+      matrix:
+        images:
+          - ubuntu:xenial
+          - ubuntu:bionic
+          - ubuntu:focal
     runs-on: ubuntu-latest
  
     steps:
