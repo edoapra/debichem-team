@@ -10,8 +10,15 @@ on:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+        matrix:
+          images:
+            - ubuntu:xenial
+            - ubuntu:bionic
+            - ubuntu:focal
+    runs-on: ubuntu-latest
  
-    runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -24,23 +31,19 @@ jobs:
           path: |
             ~/cache
           key: nwchem-debian-v001
-      - name: delete artifact
-        uses: geekyeggo/delete-artifact@v2
-        with:
-          name: nwchemdockerpkg
-          failOnError: false 
       - name: docker build
         run: |
           cd nwchem
-          ./docker_build.sh
+          ./docker_build.sh ${{ matrix.image }}
       - name: copy packages
         run: |
           find . -name "*deb" ||  true
-          mkdir  -p nwchem-ubuntu.pkg
-          cp `find nwchem -name "*deb" ` nwchem-ubuntu.pkg/.
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: nwchemdockerpkg
-          path: nwchem-ubuntu.pkg
-          retention-days: 7
+          mkdir  -p nwchem-ubuntu.pkg/${{ matrix.image }}
+          cp `find nwchem -name "*deb" ` nwchem-ubuntu.pkg/${{ matrix.image }}/.
+  upload_artifact:
+    needs: [build]
+    uses: actions/upload-artifact@v3
+    with:
+      name: nwchemdockerpkg
+      path: nwchem-ubuntu.pkg
+      retention-days: 7

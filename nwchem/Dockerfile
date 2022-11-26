@@ -1,11 +1,11 @@
-FROM        ubuntu:focal as stage1
+ARG         IMAGE
+FROM        ${IMAGE} as stage1
+#FROM        ubuntu:focal as stage1
 
 #caching from host cache dir
 #COPY .  /opt
 #COPY req.sh  .
 
-ARG DEBIAN_FRONTEND=noninteractive
-ARG APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 ARG         FC
 ARG         NWCHEM_BRANCH
 ARG         GITHUB_REPOSITORY_OWNER
@@ -13,6 +13,8 @@ ARG CACHE_HIT
 ENV         FC=${FC}
 ENV         NWCHEM_BRANCH=${NWCHEM_BRANCH}
 ENV         GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER}
+ENV DEBIAN_FRONTEND=noninteractive
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /opt
 RUN ls -lrt \
