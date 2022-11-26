@@ -40,8 +40,7 @@ endif
 ifneq (,$(filter ccsdtlr,$(DEB_BUILD_OPTIONS)))
 export CCSDTLR="yes"
 endif
-export ARMCI_NETWORK=MPI-PT
-export COMEX_MAX_NB_OUTSTANDING=16
+export ARMCI_NETWORK=MPI-PR
 export USE_HWOPT=n
 export MRCC_METHODS=y
 export IPCCSD=y
