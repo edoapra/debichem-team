@@ -18,6 +18,9 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /opt
 RUN ls -lrt \
+&& df -h  /dev/shm \
+&& mount -o remount,size=256m /dev/shm \
+&& df -h  /dev/shm \
 && apt-get  update \
 &&  apt-get install -y sudo git tar wget curl  gzip patch\
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
