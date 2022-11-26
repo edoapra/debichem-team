@@ -21,6 +21,15 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
+      - name: set artifacts dir & name
+        run: |
+          echo "art_dir=nwchem-${{ matrix.image }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ matrix.image }}.pkg" >> $GITHUB_ENV
+      - name: delete artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.art_name}}
+          failOnError: false 
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -40,15 +49,11 @@ jobs:
       - name: copy packages
         run: |
           find . -name "*deb" ||  true
-          mkdir  -p nwchem-ubuntu.pkg/${{ matrix.image }}
-          cp `find nwchem -name "*deb" ` nwchem-ubuntu.pkg/${{ matrix.image }}/.
-  upload_artifact:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: upload
+          mkdir  -p ${{ env.art_dir }}
+          cp `find nwchem -name "*deb" ` ${{ env.art_dir }}/.
+      - name: upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: nwchemdockerpkg
-          path: nwchem-ubuntu.pkg
+          name: ${{ env.art_name }}
+          path: ${{ env.art_dir }}
           retention-days: 7
