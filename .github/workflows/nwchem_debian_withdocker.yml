@@ -1,4 +1,4 @@
-name: nwchem_debian_packaging_with_docker
+name: docker_debian_packaging
 
 on:
   release:
