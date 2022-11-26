@@ -34,6 +34,7 @@ jobs:
       - name: docker build
         run: |
           cd nwchem
+          echo matrix images is ${{ matrix.image }}
           ./docker_build.sh ${{ matrix.image }}
       - name: copy packages
         run: |
