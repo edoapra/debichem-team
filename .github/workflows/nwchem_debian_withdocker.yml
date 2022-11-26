@@ -42,6 +42,7 @@ jobs:
           cp `find nwchem -name "*deb" ` nwchem-ubuntu.pkg/${{ matrix.image }}/.
   upload_artifact:
     needs: [build]
+    runs-on: ubuntu-latest
     steps:
       - name: upload
         uses: actions/upload-artifact@v3
