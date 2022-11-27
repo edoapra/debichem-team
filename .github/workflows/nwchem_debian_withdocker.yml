@@ -27,10 +27,11 @@ jobs:
       - name: modify image name
         run: |
           echo "image_name=$(echo ${{ matrix.image}}| sed 's/:/_/')" >> $GITHUB_ENV
+          echo "platform_name=$(echo ${{ matrix.platform}}| sed 's/\//_/')" >> $GITHUB_ENV
       - name: set artifacts dir & name
         run: |
-          echo "art_dir=nwchem-${{ env.image_name }}-${{ matrix.platform }}" >> $GITHUB_ENV
-          echo "art_name=nwchem-${{ env.image_name }}-${{ matrix.platform }}.pkg" >> $GITHUB_ENV
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ env.platform_name }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
       - name: delete artifact
         uses: geekyeggo/delete-artifact@v2
         with:
