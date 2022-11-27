@@ -18,6 +18,9 @@ jobs:
           - ubuntu:bionic
           - ubuntu:focal
           - debian:bullseye
+        image:
+          - amd64
+          - arm64
     runs-on: ubuntu-latest
  
     steps:
@@ -26,8 +29,8 @@ jobs:
           echo "image_name=$(echo ${{ matrix.image}}| sed 's/:/_/')" >> $GITHUB_ENV
       - name: set artifacts dir & name
         run: |
-          echo "art_dir=nwchem-${{ env.image_name }}" >> $GITHUB_ENV
-          echo "art_name=nwchem-${{ env.image_name }}.pkg" >> $GITHUB_ENV
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ matrix.platform }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ matrix.platform }}.pkg" >> $GITHUB_ENV
       - name: delete artifact
         uses: geekyeggo/delete-artifact@v2
         with:
@@ -55,7 +58,7 @@ jobs:
           push: false
           context: nwchem
           shm-size: 256m
-          platforms: amd64
+          platforms: ${{ matrix.platform }}
           outputs: type=local,dest=out
           build-args: |
             IMAGE=${{ matrix.image }}
