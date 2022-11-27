@@ -72,7 +72,8 @@ jobs:
         run: |
           find . -name "*deb" ||  true
           mkdir  -p ${{ env.art_dir }}
-          cp `find nwchem -name "*deb" ` ${{ env.art_dir }}/.
+          cp out/nwchem-data*deb ${{ env.art_dir }}/.
+          cp out/nwchem_*deb ${{ env.art_dir }}/.
       - name: rename packages
         run: |
           cd ${{ env.art_dir }}
