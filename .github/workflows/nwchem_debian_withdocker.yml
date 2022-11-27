@@ -18,7 +18,7 @@ jobs:
           - ubuntu:bionic
           - ubuntu:focal
           - debian:bullseye
-        image:
+        platform:
           - amd64
           - arm64
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
         with:
           driver-opts: image=moby/buildkit:master
           buildkitd-flags: --debug
-      - name: build_filter
+      - name: build_docker
         uses: docker/build-push-action@v3
         with:
           push: false
