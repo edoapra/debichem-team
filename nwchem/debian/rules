@@ -42,6 +42,7 @@ export CCSDTLR="yes"
 endif
 export ARMCI_NETWORK=MPI-PR
 export USE_HWOPT=n
+export USE_DYNAMIC_ARCH=1
 export MRCC_METHODS=y
 export IPCCSD=y
 export EACCSD=y
