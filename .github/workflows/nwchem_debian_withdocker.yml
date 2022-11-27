@@ -44,11 +44,21 @@ jobs:
           path: |
             ~/cache
           key: nwchem-debian-v001
-      - name: docker build
-        run: |
-          cd nwchem
-          echo matrix images is ${{ matrix.image }}
-          ./docker_build.sh ${{ matrix.image }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: image=moby/buildkit:master
+          buildkitd-flags: --debug
+      - name: build_filter
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          context: nwchem
+          shm-size: 256m
+          platforms: amd64
+          outputs: type=local,dest=out
+          build-args: |
+            IMAGE=${{ matrix.image }}
       - name: copy packages
         run: |
           find . -name "*deb" ||  true
