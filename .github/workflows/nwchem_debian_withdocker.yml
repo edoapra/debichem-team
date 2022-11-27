@@ -19,8 +19,8 @@ jobs:
           - ubuntu:focal
           - debian:bullseye
         platform:
-          - amd64
-          - arm64
+          - linux/amd64
+          - linux/arm64
     runs-on: ubuntu-latest
  
     steps:
@@ -52,6 +52,11 @@ jobs:
         with:
           driver-opts: image=moby/buildkit:master
           buildkitd-flags: --debug
+      - name: Qemu
+        uses: docker/setup-qemu-action@v2
+        with:
+          image: tonistiigi/binfmt:qemu-v6.0.0-10
+          platforms: ${{ matrix.platform }}
       - name: build_docker
         uses: docker/build-push-action@v3
         with:
