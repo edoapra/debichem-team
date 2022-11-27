@@ -25,11 +25,11 @@ RUN ls -lrt \
 &&  apt-get install -y sudo git tar wget curl  gzip patch\
 && arch=$(uname -m) \
 && arch5=$(uname -m|cut -c 1-5) \
-&& if [[ "$arch" == "aarch64" ]]; then export FORCETARGET=" TARGET=ARMV8 "; fi \
-&& if [[ "$arch" == "ppc64le" ]]; then export FORCETARGET=" TARGET=POWER8 "; fi \
-&& if [[ "$arch" == "riscv64" ]]; then export FORCETARGET=" TARGET=RISCV64_GENERIC "; fi\
-&& if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 "; fi \
-&& if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 "; fi \
+&& if [[ "$arch" == "aarch64" ]]; then export FORCETARGET=" TARGET=ARMV8 "; unset USE_DYNAMIC_ARCH; fi \
+&& if [[ "$arch" == "ppc64le" ]]; then export FORCETARGET=" TARGET=POWER8 "; unset USE_DYNAMIC_ARCH; fi \
+&& if [[ "$arch" == "riscv64" ]]; then export FORCETARGET=" TARGET=RISCV64_GENERIC ";unset USE_DYNAMIC_ARCH; fi\
+&& if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 ";unset USE_DYNAMIC_ARCH; fi \
+&& if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 ";unset USE_DYNAMIC_ARCH; fi \
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
 && mv edoapra-debichem-team-* debichem-team \
