@@ -30,6 +30,7 @@ RUN ls -lrt \
 && if [[ "$arch" == "riscv64" ]]; then export FORCETARGET=" TARGET=RISCV64_GENERIC ";unset USE_DYNAMIC_ARCH; fi\
 && if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 ";unset USE_DYNAMIC_ARCH; fi \
 && if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 ";unset USE_DYNAMIC_ARCH; fi \
+&& env \
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
 && mv edoapra-debichem-team-* debichem-team \
