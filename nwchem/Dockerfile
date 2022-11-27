@@ -17,7 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /opt
-RUN  --mount=type=tmpfs.target=/dev/shm,size=256m
+#RUN  --mount=type=tmpfs.target=/dev/shm,size=256m
 
 RUN ls -lrt \
 && df -h  /dev/shm \
