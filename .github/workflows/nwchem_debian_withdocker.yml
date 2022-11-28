@@ -58,6 +58,30 @@ jobs:
         with:
           image: tonistiigi/binfmt:qemu-v6.0.0-10
           platforms: ${{ matrix.platform }}
+      - name: fetch cache
+        if: (steps.setup-cache.outputs.cache-hit == 'true')
+        run: |
+          cd ${{ matrix.folder }}
+          ls -lrta
+          if [[ -f ~/cache/libext.tar.bz2 ]]; then \
+          echo "libext cache present" ; \
+          mkdir -p cache|| true ; \
+          rsync -av ~/cache/libext* cache/. ; \
+          echo "libext cache fetched" ; \
+          if [[ -f ~/cache/simint.tar.bz2 ]]; then \
+          echo "simint cache present" ; \
+          mkdir -p cache|| true ; \
+          rsync -av ~/cache/simint* cache/. ; \
+          echo "simint cache fetched" ; \
+          fi
+          ls -l cache/ ; \
+          echo "======" ; \
+          fi
+          echo "cache_hit=Y" >> $GITHUB_ENV
+      - name: negative-cache-hit-reporter
+        if: (steps.setup-cache.outputs.cache-hit != 'true')
+        run: |
+          echo "cache_hit=N" >> $GITHUB_ENV
       - name: build_docker
         uses: docker/build-push-action@v3
         with:
@@ -68,6 +92,16 @@ jobs:
           outputs: type=local,dest=out
           build-args: |
             IMAGE=${{ matrix.image }}
+            CACHE_HIT=${{ env.cache_hit }}
+      - name: store cache
+        if:  ( github.actor == github.repository_owner )
+        run: |
+            mkdir -p ~/cache/
+            docker run --privileged --user 0 --rm --platform ${{matrix.archs }} \
+            --entrypoint='/bin/cp' -v ~/cache:/data \
+            ${{ env.tag }} \
+            -rp /opt/nwchem/src/libext/libext.tar.bz2 /data/.  || true
+            ls -Ralrt ~/cache || true
       - name: copy packages
         run: |
           find . -name "*deb" ||  true

@@ -26,7 +26,11 @@ ifeq ($(DEB_HOST_ARCH),armhf)
 export GCC49_ARM_BROKEN="yes"
 endif
 export NWCHEM_TOP=${CURDIR}
+ifeq ($(CACHE_HIT),N)
+export NWCHEM_MODULES="nwdft driver solvation python"
+else
 export NWCHEM_MODULES=all python
+endif
 export NWCHEM_LONG_PATHS="Y"
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
