@@ -4,6 +4,9 @@
 #
 let np=2
 #export MPIRUN_PATH="timeout -v --preserve-status 5m mpirun "
+if [[ ${CACHE_HIT} == "N" ]]; then
+    exit 0
+fi
 export OMPI_ALLOW_RUN_AS_ROOT=1
 export OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 export MPIRUN_PATH="timeout 5m mpirun --allow-run-as-root "
