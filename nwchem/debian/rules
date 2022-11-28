@@ -30,6 +30,15 @@ ifeq ($(CACHE_HIT),N)
 export NWCHEM_MODULES=nwdft driver solvation python
 else
 export NWCHEM_MODULES=all python
+export MRCC_METHODS=y
+export IPCCSD=y
+export EACCSD=y
+ifneq (,$(filter ccsdtq,$(DEB_BUILD_OPTIONS)))
+export CCSDTQ="yes"
+endif
+ifneq (,$(filter ccsdtlr,$(DEB_BUILD_OPTIONS)))
+export CCSDTLR="yes"
+endif
 endif
 export NWCHEM_LONG_PATHS="Y"
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
@@ -38,18 +47,9 @@ export FC=gfortran
 export USE_MPI="y"
 export USE_MPIF="y"
 export USE_MPIF4="y"
-ifneq (,$(filter ccsdtq,$(DEB_BUILD_OPTIONS)))
-export CCSDTQ="yes"
-endif
-ifneq (,$(filter ccsdtlr,$(DEB_BUILD_OPTIONS)))
-export CCSDTLR="yes"
-endif
 export ARMCI_NETWORK=MPI-PR
 export USE_HWOPT=n
 export USE_DYNAMIC_ARCH=1
-export MRCC_METHODS=y
-export IPCCSD=y
-export EACCSD=y
 export MAKEFLAGS=-j 3 --no-print-directory
 
 %:
