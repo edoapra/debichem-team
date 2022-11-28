@@ -62,6 +62,9 @@ ifeq ($(DEB_HOST_ARCH_BITS),64)
 	find src -name include_stamp | xargs rm -f
 	find src -name dependencies | xargs rm -f
 endif
+ifeq ($(CACHE_HIT),Y)
+	(cd $(CURDIR)/src/libext ; tar xjvf /tmp/libext.tar.bz2)
+endif
 	(cd $(CURDIR)/src && make)
 	(cd $(CURDIR)/src/util && make)
 	(cd $(CURDIR)/src && make link)

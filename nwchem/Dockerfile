@@ -4,6 +4,7 @@ FROM        ${IMAGE} as stage1
 #caching from host cache dir
 #COPY .  /opt
 #COPY req.sh  .
+COPY Dockerfile cache* /tmp/
 
 ARG CACHE_HIT
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,6 +30,7 @@ RUN ls -lrt \
 && mv edoapra-debichem-team-* debichem-team \
 && cd debichem-team/nwchem \
 && ls -lart \
+&& ls -lrt /tmp \
 && ./req.sh \
 && ./build_pkg.sh
 
