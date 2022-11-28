@@ -91,8 +91,6 @@ jobs:
           shm-size: 256m
           platforms: ${{ matrix.platform }}
           outputs: type=local,dest=out
-          tags: |
-            ${{ env.art_dir }}
           build-args: |
             IMAGE=${{ matrix.image }}
             CACHE_HIT=${{ env.cache_hit }}
@@ -100,10 +98,8 @@ jobs:
         if:  ( github.actor == github.repository_owner )
         run: |
             mkdir -p ~/cache/
-            docker run --privileged --user 0 --rm --platform ${{matrix.platform }} \
-            --entrypoint='/bin/cp' -v ~/cache:/data \
-            ${{ env.art_dir }} \
-            -rp /opt/debichem-team/nwchem/nwchem-7.2.0/src/libext/libext.tar.bz2 /data/.  || true
+            ls -lrta out || true
+            cp out/libext.tar.bz2 ~/cache || true
             ls -Ralrt ~/cache || true
       - name: copy packages
         run: |

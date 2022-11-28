@@ -36,6 +36,7 @@ RUN ls -lrt \
 
 FROM scratch AS export-stage
 COPY --from=stage1 /opt/debichem-team/nwchem/*.deb .
+COPY --from=stage1 /opt/debichem-team/nwchem/nwchem-7.2.0/src/libext/libext.tar.bz2 .
 
 #WORKDIR     /data
 #ENTRYPOINT  ["nwchem"]
