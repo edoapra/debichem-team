@@ -27,7 +27,7 @@ export GCC49_ARM_BROKEN="yes"
 endif
 export NWCHEM_TOP=${CURDIR}
 ifeq ($(CACHE_HIT),N)
-export NWCHEM_MODULES="nwdft driver solvation python"
+export NWCHEM_MODULES=nwdft driver solvation python
 else
 export NWCHEM_MODULES=all python
 endif
