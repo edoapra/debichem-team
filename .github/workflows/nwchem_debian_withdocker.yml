@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   build:
     strategy:
       fail-fast: false
@@ -47,7 +48,7 @@ jobs:
         with:
           path: |
             ~/cache
-          key: nwchem-debian-v001
+          key: nwchem-${{ env.image_name }}-${{ env.platform_name }}-v001
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
