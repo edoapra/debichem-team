@@ -68,6 +68,9 @@ endif
 	(cd $(CURDIR)/src && make)
 	(cd $(CURDIR)/src/util && make)
 	(cd $(CURDIR)/src && make link)
+ifeq ($(CACHE_HIT),N)
+	(cd $(CURDIR)/src/libext ; tar cjvf libext.tar.bz2 lib/* )
+endif
 
 override_dh_auto_clean:
 	dh_testdir
