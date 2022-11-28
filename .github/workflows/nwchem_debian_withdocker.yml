@@ -62,7 +62,7 @@ jobs:
       - name: fetch cache
         if: (steps.setup-cache.outputs.cache-hit == 'true')
         run: |
-          cd ${{ matrix.folder }}
+          cd nwchem
           ls -lrta
           if [[ -f ~/cache/libext.tar.bz2 ]]; then \
           echo "libext cache present" ; \
