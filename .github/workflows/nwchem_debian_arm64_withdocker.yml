@@ -1,4 +1,4 @@
-name: debian_arm64_packaging
+name: debian_arm_packaging
 
 on:
   release:
@@ -21,6 +21,13 @@ jobs:
           - debian:bullseye
         platform:
           - linux/arm64
+        armci_network:
+          - mpi-pr
+          - mpi-ts
+        include:
+          - image: ubuntu:focal
+            platform: linux/arm/v7
+            armci_network: mpi-ts
     runs-on: [self-hosted,linux_arm64]
  
     steps:
@@ -30,8 +37,8 @@ jobs:
           echo "platform_name=$(echo ${{ matrix.platform}}| sed 's/\//_/')" >> $GITHUB_ENV
       - name: set artifacts dir & name
         run: |
-          echo "art_dir=nwchem-${{ env.image_name }}-${{ env.platform_name }}" >> $GITHUB_ENV
-          echo "art_name=nwchem-${{ env.image_name }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
       - name: delete artifact
         uses: geekyeggo/delete-artifact@v2
         with:
@@ -61,6 +68,7 @@ jobs:
           outputs: type=local,dest=out
           build-args: |
             IMAGE=${{ matrix.image }}
+            ARMCI_NETWORK=${{ matrix.armci_network }}
       - name: copy packages
         run: |
           find . -name "*deb" ||  true
