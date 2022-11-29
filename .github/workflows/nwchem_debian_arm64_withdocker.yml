@@ -41,13 +41,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 5
-      - name: Setup cache
-        id: setup-cache
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/cache
-          key: nwchem-${{ env.image_name }}-${{ env.platform_name }}-v001
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
@@ -58,30 +51,6 @@ jobs:
         with:
           image: tonistiigi/binfmt:qemu-v6.0.0-10
           platforms: ${{ matrix.platform }}
-      - name: fetch cache
-        if: (steps.setup-cache.outputs.cache-hit == 'true')
-        run: |
-          cd nwchem
-          ls -lrta
-          if [[ -f ~/cache/libext.tar.bz2 ]]; then \
-          echo "libext cache present" ; \
-          mkdir -p cache|| true ; \
-          rsync -av ~/cache/libext* cache/. ; \
-          echo "libext cache fetched" ; \
-          if [[ -f ~/cache/simint.tar.bz2 ]]; then \
-          echo "simint cache present" ; \
-          mkdir -p cache|| true ; \
-          rsync -av ~/cache/simint* cache/. ; \
-          echo "simint cache fetched" ; \
-          fi
-          ls -l cache/ ; \
-          echo "======" ; \
-          fi
-          echo "cache_hit=Y" >> $GITHUB_ENV
-      - name: negative-cache-hit-reporter
-        if: (steps.setup-cache.outputs.cache-hit != 'true')
-        run: |
-          echo "cache_hit=N" >> $GITHUB_ENV
       - name: build_docker
         uses: docker/build-push-action@v3
         with:
@@ -92,14 +61,6 @@ jobs:
           outputs: type=local,dest=out
           build-args: |
             IMAGE=${{ matrix.image }}
-            CACHE_HIT=${{ env.cache_hit }}
-      - name: store cache
-        if:  ( github.actor == github.repository_owner )
-        run: |
-            mkdir -p ~/cache/
-            ls -lrta out || true
-            cp out/libext.tar.bz2 ~/cache || true
-            ls -Ralrt ~/cache || true
       - name: copy packages
         run: |
           find . -name "*deb" ||  true
