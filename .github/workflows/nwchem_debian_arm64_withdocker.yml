@@ -24,6 +24,10 @@ jobs:
         armci_network:
           - mpi-pr
           - mpi-ts
+        include:
+          - image: ubuntu:focal
+            platform: linux/arm/v7
+            armci_network: mpi-pr
     runs-on: [self-hosted,linux_arm64]
  
     steps:
