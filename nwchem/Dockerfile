@@ -31,8 +31,7 @@ RUN ls -lrt \
 
 USER $USERNAME
 
-RUN \
-&& arch=$(uname -m) \
+RUN arch=$(uname -m) \
 && arch5=$(uname -m|cut -c 1-5) \
 && if [[ "$arch" == "aarch64" ]]; then export FORCETARGET=" TARGET=ARMV8 "; fi \
 && if [[ "$arch" == "ppc64le" ]]; then export FORCETARGET=" TARGET=POWER8 "; fi \
