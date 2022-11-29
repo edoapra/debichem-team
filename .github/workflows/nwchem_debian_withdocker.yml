@@ -18,10 +18,14 @@ jobs:
           - ubuntu:xenial
           - ubuntu:bionic
           - ubuntu:focal
+          - debian:buster
           - debian:bullseye
+          - debian:bookworm
         platform:
           - linux/amd64
-          - linux/arm64
+        armci_network:
+          - mpi-pr
+          - mpi-ts
     runs-on: ubuntu-latest
  
     steps:
@@ -94,6 +98,7 @@ jobs:
           build-args: |
             IMAGE=${{ matrix.image }}
             CACHE_HIT=${{ env.cache_hit }}
+            ARMCI_NETWORK=${{ matrix.armci_network }}
       - name: store cache
         if:  ( github.actor == github.repository_owner )
         run: |
@@ -110,6 +115,9 @@ jobs:
       - name: rename packages
         run: |
           cd ${{ env.art_dir }}
+          if [[ "$ARMCI_NETWORK" == "MPI-PR" ]]; then \
+          for f in *deb; do mv $f $(echo $f|sed s/.deb/.mpipr.deb/) ; done
+          fi
           for f in *deb; do mv $f $(echo $f|sed s/.deb/.${{env.image_name}}.deb/) ; done
           ls -lrat
       - name: upload artifacts
