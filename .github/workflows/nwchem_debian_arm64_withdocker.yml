@@ -1,0 +1,119 @@
+name: debian_arm64_packaging
+
+on:
+  release:
+  schedule:
+    - cron: '0 2 * * *'
+  repository_dispatch:
+    types: [backend_automation]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ubuntu:xenial
+          - ubuntu:bionic
+          - ubuntu:focal
+          - debian:bullseye
+        platform:
+          - linux/arm64
+    runs-on: [selfhosted,linux_arm64]
+ 
+    steps:
+      - name: modify image name
+        run: |
+          echo "image_name=$(echo ${{ matrix.image}}| sed 's/:/_/')" >> $GITHUB_ENV
+          echo "platform_name=$(echo ${{ matrix.platform}}| sed 's/\//_/')" >> $GITHUB_ENV
+      - name: set artifacts dir & name
+        run: |
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ env.platform_name }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
+      - name: delete artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.art_name}}
+          failOnError: false 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
+      - name: Setup cache
+        id: setup-cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/cache
+          key: nwchem-${{ env.image_name }}-${{ env.platform_name }}-v001
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: image=moby/buildkit:master
+          buildkitd-flags: --debug
+      - name: Qemu
+        uses: docker/setup-qemu-action@v2
+        with:
+          image: tonistiigi/binfmt:qemu-v6.0.0-10
+          platforms: ${{ matrix.platform }}
+      - name: fetch cache
+        if: (steps.setup-cache.outputs.cache-hit == 'true')
+        run: |
+          cd nwchem
+          ls -lrta
+          if [[ -f ~/cache/libext.tar.bz2 ]]; then \
+          echo "libext cache present" ; \
+          mkdir -p cache|| true ; \
+          rsync -av ~/cache/libext* cache/. ; \
+          echo "libext cache fetched" ; \
+          if [[ -f ~/cache/simint.tar.bz2 ]]; then \
+          echo "simint cache present" ; \
+          mkdir -p cache|| true ; \
+          rsync -av ~/cache/simint* cache/. ; \
+          echo "simint cache fetched" ; \
+          fi
+          ls -l cache/ ; \
+          echo "======" ; \
+          fi
+          echo "cache_hit=Y" >> $GITHUB_ENV
+      - name: negative-cache-hit-reporter
+        if: (steps.setup-cache.outputs.cache-hit != 'true')
+        run: |
+          echo "cache_hit=N" >> $GITHUB_ENV
+      - name: build_docker
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          context: nwchem
+          shm-size: 256m
+          platforms: ${{ matrix.platform }}
+          outputs: type=local,dest=out
+          build-args: |
+            IMAGE=${{ matrix.image }}
+            CACHE_HIT=${{ env.cache_hit }}
+      - name: store cache
+        if:  ( github.actor == github.repository_owner )
+        run: |
+            mkdir -p ~/cache/
+            ls -lrta out || true
+            cp out/libext.tar.bz2 ~/cache || true
+            ls -Ralrt ~/cache || true
+      - name: copy packages
+        run: |
+          find . -name "*deb" ||  true
+          mkdir  -p ${{ env.art_dir }}
+          cp out/nwchem-data*deb ${{ env.art_dir }}/.
+          cp out/nwchem_*deb ${{ env.art_dir }}/.
+      - name: rename packages
+        run: |
+          cd ${{ env.art_dir }}
+          for f in *deb; do mv $f $(echo $f|sed s/.deb/.${{env.image_name}}.deb/) ; done
+          ls -lrat
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.art_name }}
+          path: ${{ env.art_dir }}
+          retention-days: 7
