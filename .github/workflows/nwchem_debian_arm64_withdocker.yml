@@ -21,7 +21,7 @@ jobs:
           - debian:bullseye
         platform:
           - linux/arm64
-    runs-on: [selfhosted,linux_arm64]
+    runs-on: [self-hosted,linux_arm64]
  
     steps:
       - name: modify image name
