@@ -13,12 +13,25 @@ ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 WORKDIR /opt
 #RUN  --mount=type=tmpfs.target=/dev/shm,size=256m
+ARG USERNAME=nwchem
+ARG USER_UID=1000
+ARG USER_GID=nwchem
 
 RUN ls -lrt \
 && ls -lrt /tmp \
 && df -h  /dev/shm \
 && apt-get -q=2  update \
-&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch\
+&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch \
+&& DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
+&& env \
+&& groupadd --gid $USER_GID $USERNAME \
+&& useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+&& echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
+
+USER $USERNAME
+
+RUN \
 && arch=$(uname -m) \
 && arch5=$(uname -m|cut -c 1-5) \
 && if [[ "$arch" == "aarch64" ]]; then export FORCETARGET=" TARGET=ARMV8 "; fi \
@@ -26,8 +39,6 @@ RUN ls -lrt \
 && if [[ "$arch" == "riscv64" ]]; then export FORCETARGET=" TARGET=RISCV64_GENERIC ";fi\
 && if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 "; fi \
 && if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 "; fi \
-&& DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
-&& env \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
 && mv edoapra-debichem-team-* debichem-team \
 && cd debichem-team/nwchem \
