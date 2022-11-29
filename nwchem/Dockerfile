@@ -40,6 +40,7 @@ RUN arch=$(uname -m) \
 && if [[ "$arch" == "riscv64" ]]; then export FORCETARGET=" TARGET=RISCV64_GENERIC ";fi\
 && if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 "; fi \
 && if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 "; fi \
+&& echo ca_certificate=/etc/ssl/certs/ca-certificates.crt >  ~/.wgetrc \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
 && mv edoapra-debichem-team-* debichem-team \
 && cd debichem-team/nwchem \
