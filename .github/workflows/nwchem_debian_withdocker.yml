@@ -24,8 +24,8 @@ jobs:
         platform:
           - linux/amd64
         armci_network:
-          - mpi-pr
-          - mpi-ts
+          - MPI-PR
+          - MPI-TS
     runs-on: ubuntu-latest
  
     steps:
@@ -35,8 +35,8 @@ jobs:
           echo "platform_name=$(echo ${{ matrix.platform}}| sed 's/\//_/')" >> $GITHUB_ENV
       - name: set artifacts dir & name
         run: |
-          echo "art_dir=nwchem-${{ env.image_name }}-${{ env.platform_name }}" >> $GITHUB_ENV
-          echo "art_name=nwchem-${{ env.image_name }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
       - name: delete artifact
         uses: geekyeggo/delete-artifact@v2
         with:
@@ -115,7 +115,7 @@ jobs:
       - name: rename packages
         run: |
           cd ${{ env.art_dir }}
-          if [[ "$ARMCI_NETWORK" == "MPI-PR" ]]; then \
+          if [[ ${{ matrix.armci_network }} == "MPI-PR" ]]; then \
           for f in *deb; do mv $f $(echo $f|sed s/.deb/.mpipr.deb/) ; done
           fi
           for f in *deb; do mv $f $(echo $f|sed s/.deb/.${{env.image_name}}.deb/) ; done

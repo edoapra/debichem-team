@@ -7,6 +7,7 @@ FROM        ${IMAGE} as stage1
 COPY Dockerfile cache* /tmp/
 
 ARG CACHE_HIT
+ARG ARMCI_NETWORK
 ENV DEBIAN_FRONTEND=noninteractive
 ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -31,6 +32,7 @@ RUN ls -lrt \
 && mv edoapra-debichem-team-* debichem-team \
 && cd debichem-team/nwchem \
 && ls -lart \
+&& echo ARMCI_NETWORK is "$ARMCI_NETWORK" \
 && ./req.sh \
 && ./build_pkg.sh
 
