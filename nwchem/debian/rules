@@ -48,7 +48,6 @@ export USE_MPI="y"
 export USE_MPIF="y"
 export USE_MPIF4="y"
 #export ARMCI_NETWORK=MPI-PR # set from docker args
-echo 
 export USE_HWOPT=n
 export USE_DYNAMIC_ARCH=1
 export MAKEFLAGS=-j 3 --no-print-directory
