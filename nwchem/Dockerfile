@@ -25,11 +25,11 @@ RUN ls -lrt \
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
 && env \
 && groupadd --gid $USER_GID $USERNAME \
-&& useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
+&& useradd --uid $USER_UID --gid $USER_GID -m $USERNAME  -d /opt \
 && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME \
-&& chown -R nwchem ~/* \
-&& chgrp -R nwchem ~/*
+&& chown -R nwchem /opt \
+&& chgrp -R nwchem /opt
 
 USER $USERNAME
 
