@@ -15,7 +15,7 @@ WORKDIR /opt
 #RUN  --mount=type=tmpfs.target=/dev/shm,size=256m
 ARG USERNAME=nwchem
 ARG USER_UID=1000
-ARG USER_GID=nwchem
+ARG USER_GID=1000
 
 RUN ls -lrt \
 && ls -lrt /tmp \
