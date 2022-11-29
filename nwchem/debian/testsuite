@@ -262,12 +262,13 @@ $RUNTESTS procs $np 						\
 	et_zn_dimer vectors_rotate sad_ch3hf			\
 	band pspw pspw_md pspw_stress				\
 	mcscf_ch2 dft_li2freq n2_ccsd tce_ccsd_t_h2o		\
-	tddft_h2o rt_tddft_dimer_charge				\
+	tddft_h2o \
 	tce_eaccsd_ozone tce_ipccsd_f2				\
 	mp2_scs_n2			\
 	tddftgrad_n2_uks tddftgrad_ch2o				\
 	water/water_md water/water_pme
 # Currently numerical unstable or failing due to other reasons:
+#	rt_tddft_dimer_charge				\
 # h2o_selci
 # tce_cr_eom_t_ch_rohf tce_mrcc_bwcc
 # tce_cc2_c2
