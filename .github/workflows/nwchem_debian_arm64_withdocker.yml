@@ -18,6 +18,7 @@ jobs:
           - ubuntu:xenial
           - ubuntu:bionic
           - ubuntu:focal
+          - ubuntu:jammy
           - debian:bullseye
         platform:
           - linux/arm64
@@ -26,6 +27,9 @@ jobs:
           - mpi-ts
         include:
           - image: ubuntu:focal
+            platform: linux/arm/v7
+            armci_network: mpi-pr
+          - image: ubuntu:jammy
             platform: linux/arm/v7
             armci_network: mpi-pr
     runs-on: [self-hosted,linux_arm64]
