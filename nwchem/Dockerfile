@@ -21,7 +21,7 @@ RUN ls -lrt \
 && ls -lrt /tmp \
 && df -h  /dev/shm \
 && apt-get -q=2  update \
-&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch \
+&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch gpg coreutils \
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
 && env \
 && groupadd --gid $USER_GID $USERNAME \
@@ -41,6 +41,11 @@ RUN arch=$(uname -m) \
 && if [[ "$arch5" == "armv6" ]]; then export FORCETARGET=" TARGET=ARMV6 "; fi \
 && if [[ "$arch5" == "armv7" ]]; then export FORCETARGET=" TARGET=ARMV7 "; fi \
 && echo ca_certificate=/etc/ssl/certs/ca-certificates.crt >  ~/.wgetrc \
+&& release_name=$(grep _CODENAME /etc/os-release |cut -d = -f 2) \
+&& if [[ "$release_name" == "focal" ]]; then wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - |  tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null  ;\
+echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ "$release_name" main' |  tee /etc/apt/sources.list.d/kitware.list >/dev/null ; \
+apt-get update ;\
+apt-get install -y cmake ; cmake --version ;fi \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
 && mv edoapra-debichem-team-* debichem-team \
 && cd debichem-team/nwchem \
