@@ -44,7 +44,8 @@ RUN arch=$(uname -m) \
 && release_name=$(grep _CODENAME /etc/os-release | tail -1 |cut -d = -f 2) \
 && if [[ "$release_name" == "focal" ]]; then sudo apt-get -y install gnupg ;\
 wget -O - http://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null  ;\
-echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] http://apt.kitware.com/ubuntu/ "$release_name" main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null ; \
+echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] http://apt.kitware.com/ubuntu/ $release_name main" | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null ; \
+sudo cat  /etc/apt/sources.list.d/kitware.list ;\
 sudo apt-get update ;\
 sudo apt-get install -y cmake ; cmake --version ;fi \
 && wget -q https://github.com/edoapra/debichem-team/tarball/builtin -O - |  tar  -xzf -  \
