@@ -21,7 +21,7 @@ RUN ls -lrt \
 && ls -lrt /tmp \
 && df -h  /dev/shm \
 && apt-get -q=2  update \
-&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch gnugpg coreutils \
+&&  apt-get -q=2 install -y sudo git tar wget curl  gzip patch gnupg coreutils \
 && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get -y install tzdata  \
 && env \
 && groupadd --gid $USER_GID $USERNAME \
