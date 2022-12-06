@@ -26,7 +26,7 @@ jobs:
           - mpi-pr
           - mpi-ts
         include:
-          - image: ubuntu:jammy
+          - image: debian:bookworm
             platform: linux/arm/v7
             armci_network: mpi-pr
     runs-on: [self-hosted,linux_arm64]
