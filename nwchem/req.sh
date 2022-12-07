@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+sudo apt-get -q=2 update
 sudo apt-get -q=2 install -y devscripts  debhelper dh-python coreutils pkg-config
 arch5=$(uname -m|cut -c 1-5)
 mpipkgs=" mpi-default-bin mpi-default-dev "
