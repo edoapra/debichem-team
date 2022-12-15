@@ -30,6 +30,7 @@ jobs:
             platform: linux/arm/v7
             armci_network: mpi-pr
     runs-on: [self-hosted,linux_arm64]
+    timeout-minutes: 2880
  
     steps:
       - name: modify image name
