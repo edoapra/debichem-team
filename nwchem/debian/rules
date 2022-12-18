@@ -40,6 +40,8 @@ ifneq (,$(filter ccsdtlr,$(DEB_BUILD_OPTIONS)))
 export CCSDTLR="yes"
 endif
 endif
+export LIBXC_LIB=/usr/lib/x86_64-linux-gnu
+export LIBXC_INCLUDE=/usr/include
 export NWCHEM_LONG_PATHS="Y"
 export LIBDIR=${NWCHEM_TOP}/lib/${NWCHEM_TARGET}
 export LARGE_FILES=TRUE
