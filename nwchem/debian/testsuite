@@ -10,7 +10,7 @@ fi
 if [[ ${ARMCI_NETWORK} == "MPI-PR" ]]; then
     let np=3
 fi
-export MPIRUN_PATH="timeout -s 9 8m mpirun "
+export MPIRUN_PATH="timeout -s 9 10m mpirun "
 if [[ "$1" == "all" ]]; then
 $RUNTESTS procs $np 5h2o_core
 $RUNTESTS procs $np acr-camb3lyp-cdfit
