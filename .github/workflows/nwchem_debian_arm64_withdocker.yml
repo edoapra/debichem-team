@@ -3,7 +3,7 @@ name: debian_arm_packaging
 on:
   release:
   schedule:
-    - cron: '0 2 * * *'
+    - cron: '0 2 * * FRI'
   repository_dispatch:
     types: [backend_automation]
   workflow_dispatch:
