@@ -1,0 +1,86 @@
+name: debian_arm_packaging
+0;95;0c
+on:
+  release:
+  schedule:
+    - cron: '0 2 * * FRI'
+  repository_dispatch:
+    types: [backend_automation]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        image:
+          - ubuntu:xenial
+          - ubuntu:bionic
+          - ubuntu:focal
+          - ubuntu:jammy
+          - debian:bullseye
+        platform:
+          - linux/amd64
+        armci_network:
+          - mpi-pr
+          - mpi-ts
+    runs-on: ubuntu-latest
+    timeout-minutes: 2880
+ 
+    steps:
+      - name: modify image name
+        run: |
+          echo "image_name=$(echo ${{ matrix.image}}| sed 's/:/_/')" >> $GITHUB_ENV
+          echo "platform_name=$(echo ${{ matrix.platform}}| sed 's/\//_/g')" >> $GITHUB_ENV
+      - name: set artifacts dir & name
+        run: |
+          echo "art_dir=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}" >> $GITHUB_ENV
+          echo "art_name=nwchem-${{ env.image_name }}-${{ matrix.armci_network }}-${{ env.platform_name }}.pkg" >> $GITHUB_ENV
+      - name: delete artifact
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: ${{ env.art_name}}
+          failOnError: false 
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 5
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: image=moby/buildkit:v0.10.6
+          buildkitd-flags: --debug
+      - name: Qemu
+        uses: docker/setup-qemu-action@v2
+        with:
+          image: tonistiigi/binfmt:qemu-v6.0.0-10
+          platforms: ${{ matrix.platform }}
+      - name: build_docker
+        uses: docker/build-push-action@v3
+        with:
+          push: false
+          context: nwchem
+          shm-size: 256m
+          platforms: ${{ matrix.platform }}
+          outputs: type=local,dest=out
+          build-args: |
+            IMAGE=${{ matrix.image }}
+            ARMCI_NETWORK=${{ matrix.armci_network }}
+      - name: copy packages
+        run: |
+          find . -name "*deb" ||  true
+          mkdir  -p ${{ env.art_dir }}
+          cp out/nwchem-data*deb ${{ env.art_dir }}/.
+          cp out/nwchem_*deb ${{ env.art_dir }}/.
+      - name: rename packages
+        run: |
+          cd ${{ env.art_dir }}
+          for f in *deb; do mv $f $(echo $f|sed s/.deb/.${{env.image_name}}.deb/) ; done
+          ls -lrat
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.art_name }}
+          path: ${{ env.art_dir }}
+          retention-days: 7
