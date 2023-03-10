@@ -1,4 +1,4 @@
-name: debian_arm_packaging
+name: debian_amd64_packaging
 
 on:
   release:
