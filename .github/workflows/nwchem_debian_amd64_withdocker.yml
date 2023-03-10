@@ -1,5 +1,5 @@
 name: debian_arm_packaging
-0;95;0c
+
 on:
   release:
   schedule:
