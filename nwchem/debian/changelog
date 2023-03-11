@@ -1,3 +1,10 @@
+nwchem (7.2.0-2) UNRELEASED; urgency=medium
+
+  * USE_SIMINT=1, SIMINT_VECTOR=AVX2
+  * USE_LIBXC=1
+
+ - Edoardo Apra <edoardo.apra@pnnl.gov>  Fri, 10 Mar 2023 11:25:09 +0100
+
 nwchem (7.2.0-1) UNRELEASED; urgency=medium
 
   * New upstream release.

@@ -25,6 +25,11 @@ export SCALAPACK_SIZE=8
 ifeq ($(DEB_HOST_ARCH),armhf)
 export GCC49_ARM_BROKEN="yes"
 endif
+ifeq ($(DEB_HOST_ARCH),amd64)
+export USE_SIMINT=1
+export USE_LIBXC=1
+export SIMINT_VECTOR=AVX2
+endif
 export NWCHEM_TOP=${CURDIR}
 ifeq ($(CACHE_HIT),N)
 export NWCHEM_MODULES=nwdft driver solvation python
