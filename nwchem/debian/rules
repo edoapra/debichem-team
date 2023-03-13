@@ -31,7 +31,7 @@ export USE_LIBXC=1
 export SIMINT_VECTOR=AVX2
 endif
 export NWCHEM_TOP=${CURDIR}
-ifeq ($(CACHE_HIT),N)
+ifeq ($(DEB_HOST_ARCH_BITS),32)
 export NWCHEM_MODULES=nwdft driver solvation python
 else
 export NWCHEM_MODULES=all python
