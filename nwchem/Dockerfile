@@ -58,7 +58,7 @@ sudo apt-get install -y cmake ; cmake --version ;fi \
 
 FROM scratch AS export-stage
 COPY --from=stage1 /opt/debichem-team/nwchem/*.deb .
-COPY --from=stage1 /opt/debichem-team/nwchem/nwchem-7.2.0/src/libext/libext.tar.bz2 .
+COPY --from=stage1 /opt/debichem-team/nwchem/nwchem-7.2.1/src/libext/libext.tar.bz2 .
 
 #WORKDIR     /data
 #ENTRYPOINT  ["nwchem"]
