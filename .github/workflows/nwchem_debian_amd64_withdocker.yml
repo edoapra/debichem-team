@@ -20,6 +20,7 @@ jobs:
           - ubuntu:focal
           - ubuntu:jammy
           - debian:bullseye
+          - debian:bookworm
         platform:
           - linux/amd64
         armci_network:
