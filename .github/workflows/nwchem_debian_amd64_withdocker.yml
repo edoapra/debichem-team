@@ -23,8 +23,8 @@ jobs:
         platform:
           - linux/amd64
         armci_network:
-          - mpi-pr
-          - mpi-ts
+          - MPI-PR
+          - MPI-TS
     runs-on: ubuntu-latest
     timeout-minutes: 2880
  
