@@ -77,12 +77,12 @@ endif
 
 override_dh_auto_clean:
 	dh_testdir
-	-(cd $(CURDIR)/src/peigs && make realclean)
-	-(cd $(CURDIR)/doc && make realclean)
+	-(cd $(CURDIR)/src/peigs && make realclean -i)
 	rm -rf $(CURDIR)/bin $(CURDIR)/lib $(CURDIR)/src/tools/lib 
 	rm -rf $(CURDIR)/QA/scratchdir $(CURDIR)/QA/testoutputs
 	rm -rf src/tools/build src/tools/install
 	rm -f src/util/util_version.F src/stubs.F src/util/util_module_avail.F src/util/util_nwchem_version.F
+	rm -f src/oblas*txt
 	find $(CURDIR) -name "*.stamp" | xargs rm -f
 	find $(CURDIR) -name "dependencies" | xargs rm -f
 	dh_auto_clean
