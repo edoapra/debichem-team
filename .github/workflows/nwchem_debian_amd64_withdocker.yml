@@ -65,6 +65,8 @@ jobs:
           shm-size: 256m
           platforms: ${{ matrix.platform }}
           outputs: type=local,dest=out
+          env: |
+            DOCKER_BUILD_NO_SUMMARY: true
           build-args: |
             IMAGE=${{ matrix.image }}
             ARMCI_NETWORK=${{ matrix.armci_network }}
