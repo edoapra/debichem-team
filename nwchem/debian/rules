@@ -82,7 +82,7 @@ override_dh_auto_clean:
 	rm -rf $(CURDIR)/QA/scratchdir $(CURDIR)/QA/testoutputs
 	rm -rf src/tools/build src/tools/install
 	rm -f src/util/util_version.F src/stubs.F src/util/util_module_avail.F src/util/util_nwchem_version.F
-	rm -f src/oblas*txt
+	rm -f src/*txt
 	find $(CURDIR) -name "*.stamp" | xargs rm -f
 	find $(CURDIR) -name "dependencies" | xargs rm -f
 	dh_auto_clean
