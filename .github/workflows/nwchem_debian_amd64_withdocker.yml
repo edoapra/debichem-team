@@ -57,7 +57,7 @@ jobs:
       - name: Qemu
         uses: docker/setup-qemu-action@v3
         with:
-          image: tonistiigi/binfmt:qemuv8.1.5
+          image: tonistiigi/binfmt:qemu-v8.1.5
           platforms: ${{ matrix.platform }}
       - name: build_docker
         uses: docker/build-push-action@v6
