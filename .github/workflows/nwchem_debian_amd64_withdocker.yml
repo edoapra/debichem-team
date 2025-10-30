@@ -15,18 +15,22 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - ubuntu:xenial
-          - ubuntu:bionic
           - ubuntu:focal
           - ubuntu:jammy
+          - ubuntu:noble
           - debian:bullseye
           - debian:bookworm
+          - debian:trixie
         platform:
           - linux/amd64
         armci_network:
           - MPI-PR
           - MPI-TS
-    runs-on: ubuntu-latest
+        os:
+          - ubuntu-latest
+        include:
+          - {platform: linux/arm64, image: debian:bookworm, armci_network: MPI-TS, os: ubuntu-24.04-arm}
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 2880
  
     steps:
