@@ -1,5 +1,5 @@
 ARG         IMAGE
-FROM        ${IMAGE} as stage1
+FROM        ${IMAGE} AS stage1
 
 #caching from host cache dir
 #COPY .  /opt
