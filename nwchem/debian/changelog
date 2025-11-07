@@ -1,3 +1,9 @@
+nwchem (7.3.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Edoardo Apra <edoardo.apra@pnnl.gov>  Thu, 07 Nov 2025 10:10:00 +0100
+
 nwchem (7.3.0-1) UNRELEASED; urgency=medium
 
   * New upstream release.
